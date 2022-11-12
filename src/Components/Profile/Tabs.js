@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, TabView } from 'react-native'
+import { View, Text,  } from "native-base";
 import React, {useState} from 'react'
-import { SceneMap } from "react-native-tab-view";
-import { useWindowDimensions } from 'react-native';
+import { SceneMap, TabView  } from "react-native-tab-view";
+import { useWindowDimensions, StyleSheet } from 'react-native';
 import Profile from './Profile';
 import Orders from './Orders';
 
