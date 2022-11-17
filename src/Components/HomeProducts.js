@@ -1,8 +1,27 @@
 import { Box, Flex, Heading, Image, Pressable, ScrollView, Text } from 'native-base'
-import React from 'react'
+import React, {  useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import Rating from './Rating'
+import { listProduct} from "../Redux/Actions/ProductActions";
+
+import {baseURL} from '../Url'
 
 function HomeProducts() {
+
+    const dispatch = useDispatch();
+
+    
+    const productList = useSelector((state)=> state.productList);
+    const {loading, error, products} = productList;
+    console.log(loading, error, products);
+
+    useEffect(()=> {
+        dispatch(listProduct())
+      },[dispatch])
+    
+    
+
+    
   return (
     <ScrollView flex={1} showsVerticalScrollIndicator={false}>
         <Flex 
@@ -11,7 +30,7 @@ function HomeProducts() {
             justifyContent="space-between"
             px={6}
         >
-            {/* {
+            {
                 products.map((product) =>(
                     <Pressable 
                         key={product._id} 
@@ -26,7 +45,7 @@ function HomeProducts() {
 
                     >
                         <Image
-                            source={{uri: product.image}}
+                            source={{uri: `${baseURL}images/products/` + product.imageProduct}}
                             alt={product.name}
                             w="full"
                             h={24}
@@ -42,7 +61,7 @@ function HomeProducts() {
                     </Pressable>
                     
                 ))
-            } */}
+            }
         </Flex>
     </ScrollView>
   )

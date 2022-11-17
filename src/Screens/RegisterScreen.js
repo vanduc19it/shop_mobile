@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-function RegisterScreen() {
+function RegisterScreen({navigation}) {
   return (
     <Box flex={1} bg="black">
     <Image 
@@ -73,14 +73,20 @@ function RegisterScreen() {
          />
        </VStack> 
        <Button 
-       _pressed={{
-         bg: "#1cef58"
-       }}
-       _text={{
-         color: "#fff"
-       }}
-       my={30} w="40" rounded={50} bg="#f7dd18">SIGN UP</Button>
-       <Pressable mt={4}>
+          _pressed={{
+            bg: "#1cef58"
+          }}
+          _text={{
+            color: "#fff"
+          }}
+          my={30} w="40" 
+          rounded={50} 
+          bg="#f7dd18"
+          onPress={() => navigation.navigate("Bottom")}
+       >
+          SIGN UP
+       </Button>
+       <Pressable mt={4} onPress={() => navigation.navigate("Login")}>
          <Text color="#1cef58">
            LOGIN
          </Text>

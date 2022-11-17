@@ -1,9 +1,27 @@
 import { Box, Button, Heading, Image, Input, Pressable, Text, View, VStack } from 'native-base'
-import React from 'react'
+import React, {useState} from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from "react-redux";
+import { login } from '../Redux/Actions/userActions';
 
-function LoginScreen() {
+
+
+
+
+function LoginScreen({navigation}) {
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("")
+const [password, setPassword] = useState("") 
+ console.log(email, password)
+
+const handleLogin = () => {
+  // dispatch(login(email, password))
+  navigation.navigate("Bottom")
+}
+
   return (
    <Box flex={1} bg="black">
      <Image 
@@ -26,7 +44,7 @@ function LoginScreen() {
         <VStack space={8} pt="6">
           <Input
             InputLeftElement={
-              <MaterialIcons name="email" size={24} color="black" />
+              <MaterialIcons name="email" size={24} color="black"  />
             }
             variant="underlined" 
             placeholder='user@gmail.com' 
@@ -34,6 +52,8 @@ function LoginScreen() {
             color="white"
             borderBottomColor="black"
             pl={2} 
+            value={email}
+            onChangeText={(e) => setEmail(e)}
           />
           <Input
             InputLeftElement={
@@ -46,17 +66,26 @@ function LoginScreen() {
             color="white"
             borderBottomColor="black"
             pl={2} 
+            value={password}
+            onChangeText={(e) => setPassword(e)}
           />
         </VStack> 
         <Button 
-        _pressed={{
-          bg: "#1cef58"
-        }}
-        _text={{
-          color: "#fff"
-        }}
-        my={30} w="40" rounded={50} bg="#f7dd18">LOGIN</Button>
-        <Pressable mt={4}>
+          _pressed={{
+            bg: "#1cef58"
+          }}
+          _text={{
+            color: "#fff"
+          }}
+          my={30} 
+          w="40" 
+          rounded={50} 
+          bg="#f7dd18"
+          onPress={handleLogin}
+        >
+          LOGIN
+        </Button>
+        <Pressable mt={4} onPress={() => navigation.navigate("Register")}>
           <Text color="#1cef58">
             SIGN UP
           </Text>
