@@ -1,23 +1,36 @@
 import { Box, Heading, HStack, Image, ScrollView, Text, View, Spacer } from 'native-base'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Rating from '../Components/Rating'
 import NumericInput from "react-native-numeric-input"
 import Buttone from '../Components/Buttone'
 import Review from '../Components/Review'
-function SingleProductScreen() {
-  const [value, setValue] = useState(0)
+import { useDispatch, useSelector } from "react-redux";
+
+import {baseURL} from '../Url'
+import { listProductDetail } from '../Redux/Actions/ProductActions'
+
+function SingleProductScreen({route}) {
+
+  const product = route.params;
+  
+  const [value, setValue] = useState(1)
+
+  const dispatch = useDispatch();
+
+ 
+
   return (
     <Box safeArea flex={1} bg="#fff"> 
         <ScrollView px={5} showsVerticalScrollIndicator={false}>
           <Image 
-            source={require("../../assets/shop.png")}
+            source={{uri: `${baseURL}images/products/` + product.imageProduct}}
             alt="Image"
             w="full"
             h={300}
             resizeMode="contain"
           />
           <Heading bold fontSize={15} mb={2} lineHeight={22}>
-              San pham1 
+              {product.nameProduct} 
           </Heading>
           <Rating value={4}/>
           <HStack space={2} alignItems="center" my={5}>
@@ -27,15 +40,13 @@ function SingleProductScreen() {
             leftButtonBackgroundColor="#66aff6" 
           />
           <Spacer/>
-          <Heading bold color="#000" fontSize={19}>500 vnd</Heading>
+          <Heading bold color="#000" fontSize={19}>{product.price} vnd</Heading>
 
           </HStack>
-          <Text lineHeight={24} fontSize={12}>TLDRFlutter and React Native are natural competitors as two of the most used multi-platform mobile app frameworks.
-           The answer lies not in the technical aspects of React Native and Flutter at all.
-            Hiring developers is famously difficult right now, but the pool of developers to draw from is far larger than Flutter's.
+          <Text lineHeight={24} fontSize={12}>{product.description}
           </Text>
           <Buttone bg="#66aff6" color="#fff" mt={10}>THÊM VÀO GIỎ HÀNG</Buttone>
-          <Review/>
+          <Review product={product}/>
         </ScrollView>
     </Box>
   ) 

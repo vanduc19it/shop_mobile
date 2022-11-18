@@ -18,9 +18,9 @@ import {USER_LOGIN_REQUEST,
         USER_DETAIL_SUCCESS,
         USER_DETAIL_FAIL} from "../Constants/UserConstants"
 import axios from "axios"
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // test thay đổi 
-const baseURL = "http://localhost:5000/";
+import {baseURL} from '../../Url'
 
 //login
 export const login = (email, password) => async (dispatch) => {
@@ -34,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
         }
         const {data} = await axios.post(`${baseURL}login-user`, {email, password}, config);
         dispatch({type:USER_LOGIN_SUCCESS, payload:data})
-        localStorage.setItem("userInfo", JSON.stringify(data))
+        AsyncStorage.setItem("userInfo", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 
@@ -61,7 +61,7 @@ export const register = (username, email, password) => async (dispatch) => {
         const {data} = await axios.post(`${baseURL}register`, {username, email, password}, config);
         console.log(data);
         dispatch({type: USER_REGISTER_SUCCESS, payload:data})
-        localStorage.setItem("userInfo", JSON.stringify(data))
+        AsyncStorage.setItem("userInfo", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 

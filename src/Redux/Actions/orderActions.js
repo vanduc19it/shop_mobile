@@ -2,7 +2,7 @@ import axios from "axios";
 import { CART_CLEAR_PRODUCTS } from "../Constants/CartConstants";
 import { GET_SINGLE_ORDER_FAIL, GET_SINGLE_ORDER_REQUEST, GET_SINGLE_ORDER_SUCCESS, ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAIL_FAIL, ORDER_DETAIL_REQUEST, ORDER_DETAIL_SUCCESS } from "../Constants/orderConstants";
 import { logout } from "./userActions";
-const baseURL = "http://localhost:5000/";
+import {baseURL} from '../../Url'
 //dat hang
 export const createOrder = (order) => async (dispatch, getState) => {
     try {

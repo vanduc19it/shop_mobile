@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CREATE_SHOP_FAIL, CREATE_SHOP_REQUEST, CREATE_SHOP_SUCCESS, GET_SHOP_FAIL, GET_SHOP_REQUEST, GET_SHOP_SUCCESS } from "../Constants/shopConstants";
-const baseURL = "http://localhost:5000/";
+import {baseURL} from '../../Url'
 //TAO SHOP
 export const createShop = (idUser,nameShop, phoneShop, addressShop) => async (dispatch) => {
     try {
