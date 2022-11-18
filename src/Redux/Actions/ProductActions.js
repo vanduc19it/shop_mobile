@@ -47,7 +47,7 @@ export const listProductDetail = (id) => async (dispatch) => {
     try {
         console.log(id);
         dispatch({type: PRODUCT_DETAIL_REQUEST});
-        const {data} = await axios.get(`http://localhost:5000/detail-product?idProduct=${id}`);
+        const {data} = await axios.get(`${baseURL}detail-product?idProduct=${id}`);
         console.log(data)
         dispatch({type:PRODUCT_DETAIL_SUCCESS, payload:data})
         
@@ -65,7 +65,7 @@ export const listProductDetail = (id) => async (dispatch) => {
 export const getProductFeedback = (idProduct) => async (dispatch) => {
     try {
         dispatch({type: PRODUCT_GET_FEEDBACK_REQUEST});
-        const {data} = await axios.get(`http://localhost:5000/get-feedback/${idProduct}/all`);
+        const {data} = await axios.get(`${baseURL}get-feedback/${idProduct}/all`);
         dispatch({type:PRODUCT_GET_FEEDBACK_SUCCESS, payload:data})
         console.log(data)
         
@@ -94,7 +94,7 @@ export const createProductFeedback = (idProduct, idUser, rate,comment) => async 
                 Authorization:  `${userInfo.token}`
             }
         }
-        await axios.post(`http://localhost:5000/feedback-user`,{ 
+        await axios.post(`${baseURL}feedback-user`,{ 
             "idProduct":idProduct,
             "idUser": idUser,
             "rate":  rate,

@@ -1,36 +1,102 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack } from 'native-base'
-import Rating from './Rating'
+import React, { useState, useEffect } from 'react'
+import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, Image, Flex } from 'native-base'
+import Ratingg from './Rating'
 import Message from './Notifications/Message'
 import Buttone from '../Components/Buttone'
+import { useDispatch, useSelector } from "react-redux";
+import { getProductFeedback } from '../Redux/Actions/ProductActions'
+import moment from "moment";
+import Colors from '../Colors'
+import {baseURL} from '../Url'
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
-export default function Review() {
+export default function Review({product}) {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state)=> state.userLogin)
+  const {userInfo} = userLogin;
+
+
+  const productGetFeedback = useSelector((state)=> state.productGetFeedback)
+  const {feedbacks} = productGetFeedback;
+  
   const [rating, setRating] = useState('')
+
+  useEffect(()=> {
+    dispatch(getProductFeedback(product._id))
+  },[dispatch,product._id])
+
+
   return (
     <Box my={9}>
         <Heading bold fontSize={15} mb={2}> REVIEW</Heading>
         {/* ko cos comment */}
-        <Message children={"ko co comment"}/>
-        {/* co comment */}
-        <Box p={3} bg="#ccc" mt={5} rounded={5}>
-            <Heading fontSize={15} color="#000">Phung vip</Heading>
-            <Rating value={4}/>
-            <Text my={2} fontSize={11}>Dec 12 2022</Text>
-            <Message children={"phung vip pro pro pro pro"}/>
-        </Box>
+        {
+          !userInfo ?
+          (
+            <Message children={"ko co comment"}/>
+          )
+          : 
+          (
+
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <Box p={3} bg={Colors.gray} mt={5} rounded={5}>
+            {
+              feedbacks.map((feedback) => (
+                <>
+                <Box >
+                  <Flex direction="row" >
+                  <Image source={{uri: `${baseURL}images/users/` + feedback.user.avatar}} 
+                  w={10}
+                  h={30}
+                    resizeMode="contain"
+                  alt={feedback.user.username}
+                 
+
+                  />
+                  <Heading fontSize={15} mt={1} color="#000">{feedback.user.username}</Heading>
+                  <AirbnbRating size={12} defaultRating={feedback.rate}isDisabled   reviews={[]} />
+                </Flex>
+              
+                </Box>
+                
+                <Ratingg value={feedback.rate}/>
+ 
+              
+              <Text my={2} fontSize={11}>{moment(Number(feedback.createAt)).locale("vi").startOf("second").fromNow() }</Text>
+              <Message children={feedback.comment}/>
+              </>
+              ))
+            }
+            
+            </Box>
+            </ScrollView>
+           
+          )
+        }
+       
+   
+
         <Box mt={6} >
           <Heading fontSize={15} color="#000" mb={4}> ĐÁNH GIÁ SẢN PHẨM</Heading>
           <VStack>
-            <FormControl>
+          {
+            userInfo ? 
+            (
+              <>
+                <FormControl>
               <FormControl.Label 
                 _text={{
                   fontSize: "12px",
                   fontWeight: "bold",
                 }} 
               >
-                đánh giá
+
               </FormControl.Label>
+
+              <AirbnbRating size={18} defaultRating="1"  />
               <Select 
               bg="#66aff6"
               borderWidth={0} 
@@ -71,13 +137,23 @@ export default function Review() {
             <Buttone bg="#66aff6" color="#fff" mt={5}>
               BINH LUAN
             </Buttone>
-            <Message 
+            </>
+            
+            )
+            : 
+            (
+              <Message 
               color="#fff"
               bg="#000"
               children={
                 "XIn dang nhap de binh luan"
               }
             />
+            )
+         
+          }
+            
+          
           </VStack>
         </Box>
     </Box>

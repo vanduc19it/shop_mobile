@@ -18,9 +18,12 @@ const [password, setPassword] = useState("")
  console.log(email, password)
 
 const handleLogin = () => {
-  // dispatch(login(email, password))
+  dispatch(login(email, password))
   navigation.navigate("Bottom")
 }
+
+const userLogin = useSelector((state) => state.userLogin);
+const { error, loading, userInfo} = userLogin;
 
   return (
    <Box flex={1} bg="black">
