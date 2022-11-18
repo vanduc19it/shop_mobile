@@ -10,6 +10,7 @@ import moment from "moment";
 import Colors from '../Colors'
 import {baseURL} from '../Url'
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import { createProductFeedback } from '../Redux/Actions/ProductActions'
 
 export default function Review({product}) {
   const dispatch = useDispatch();
@@ -21,11 +22,23 @@ export default function Review({product}) {
   const productGetFeedback = useSelector((state)=> state.productGetFeedback)
   const {feedbacks} = productGetFeedback;
   
-  const [rating, setRating] = useState('')
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
+
+  console.log(product._id, userInfo.idUser, rating, comment)
 
   useEffect(()=> {
     dispatch(getProductFeedback(product._id))
   },[dispatch,product._id])
+
+  //danh gia san phan
+  const handleReview = (e) => {
+    e.preventDefault();
+    if(comment != '' && rating > 0 ) {
+      dispatch(createProductFeedback(product._id, userInfo.idUser, rating, comment));
+    }
+    
+  }
 
 
   return (
@@ -35,7 +48,7 @@ export default function Review({product}) {
         {
           !userInfo ?
           (
-            <Message children={"ko co comment"}/>
+            <Message children={"Không có đánh giá "}/>
           )
           : 
           (
@@ -57,7 +70,7 @@ export default function Review({product}) {
 
                   />
                   <Heading fontSize={15} mt={1} color="#000">{feedback.user.username}</Heading>
-                  <AirbnbRating size={12} defaultRating={feedback.rate}isDisabled   reviews={[]} />
+
                 </Flex>
               
                 </Box>
@@ -95,9 +108,19 @@ export default function Review({product}) {
               >
 
               </FormControl.Label>
-
-              <AirbnbRating size={18} defaultRating="1"  />
-              <Select 
+                {/* rating */}
+              <Box floating="left">
+              <AirbnbRating 
+                reviews={["Quá thất vọng", "Sản phẩm tệ", "Bình thường", "Sản phẩm tốt","Sản phẩm tuyệt vời"]}
+                size={25} 
+                defaultRating={rating} 
+                reviewSize={20} 
+                onFinishRating={(value)=> setRating(value)} 
+              
+              />
+              </Box>
+              
+              {/* <Select 
               bg="#66aff6"
               borderWidth={0} 
               rounded={5} 
@@ -115,7 +138,7 @@ export default function Review({product}) {
                 <Select.Item label="binh thuong" value="3"/>
                 <Select.Item label="tot" value="4"/>
                 <Select.Item label="tuyet voi" value="5"/>
-              </Select>
+              </Select> */}
             </FormControl>
             <FormControl>
               <FormControl.Label
@@ -127,14 +150,17 @@ export default function Review({product}) {
                 Comment
               </FormControl.Label>
               <TextArea h={24} w="full" placeholder="san pham nhu db..." borderWidth={0}
+                
                 bg="#66aff6"
                 py={4} 
                 _focus={{
                   bg: "#66aff6",
                 }}
+                value={comment}
+                onChangeText={(e) => setComment(e)}
               />
             </FormControl>
-            <Buttone bg="#66aff6" color="#fff" mt={5}>
+            <Buttone bg="#66aff6" color="#fff" mt={5} onPress={handleReview}>
               BINH LUAN
             </Buttone>
             </>
@@ -146,7 +172,7 @@ export default function Review({product}) {
               color="#fff"
               bg="#000"
               children={
-                "XIn dang nhap de binh luan"
+                "Bạn vui lòng đăng nhập để đánh giá"
               }
             />
             )
