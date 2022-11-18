@@ -28,6 +28,7 @@ function SingleProductScreen({route}) {
             w="full"
             h={300}
             resizeMode="contain"
+            mt ={2}
           />
           <Heading bold fontSize={15} mb={2} lineHeight={22}>
               {product.nameProduct} 
