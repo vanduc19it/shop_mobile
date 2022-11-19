@@ -3,6 +3,7 @@ import { CART_CLEAR_PRODUCTS } from "../Constants/CartConstants";
 import { GET_SINGLE_ORDER_FAIL, GET_SINGLE_ORDER_REQUEST, GET_SINGLE_ORDER_SUCCESS, ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_DETAIL_FAIL, ORDER_DETAIL_REQUEST, ORDER_DETAIL_SUCCESS } from "../Constants/orderConstants";
 import { logout } from "./userActions";
 import {baseURL} from '../../Url'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 //dat hang
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -49,7 +50,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         dispatch({type:ORDER_CREATE_SUCCESS, payload:data})
         dispatch({type: CART_CLEAR_PRODUCTS, payload:data})
 
-        localStorage.removeItem("cartItems")
+        await AsyncStorage.removeItem("cartItems")
         
     } catch (error) {
         const message = error.response && error.response.data.message

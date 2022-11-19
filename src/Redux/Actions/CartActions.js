@@ -1,9 +1,12 @@
 import axios from "axios";
 import { CART_ADD_PRODUCTS, CART_REMOVE_PRODUCTS, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_INFO } from "../Constants/CartConstants";
 import {baseURL} from '../../Url'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 //add product to cart
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
     const {data} = await axios.get(`${baseURL}detail-product?idProduct=${id}`); 
+    console.log(data)
     dispatch({
         type: CART_ADD_PRODUCTS,
         payload: {
@@ -16,7 +19,8 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
         }    
     });
         
-       localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+      await AsyncStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+
 }
 
 //remove product to cart
@@ -27,7 +31,7 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
         payload: id, 
     });
         
-       localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+      await AsyncStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 }
 
 //luu thong tin giao hang
@@ -38,7 +42,7 @@ export const saveShippingInfo = (data) => async (dispatch) => {
         payload: data, 
     });
         
-       localStorage.setItem("shippingInfo", JSON.stringify(data));
+      await AsyncStorage.setItem("shippingInfo", JSON.stringify(data));
 }
 
 //luu phuong thuc thanh toan
@@ -49,5 +53,5 @@ export const savePaymentMethod = (data) => async (dispatch) => {
         payload: data, 
     });
         
-       localStorage.setItem("paymentMethod", JSON.stringify(data));
+      await AsyncStorage.setItem("paymentMethod", JSON.stringify(data));
 }

@@ -7,6 +7,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 
 const Swiper =() => {
+  
     <SwipeListView
         rightOpenValue={-50}
         previewRowKey="0"

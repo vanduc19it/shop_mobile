@@ -61,7 +61,7 @@ export const register = (username, email, password) => async (dispatch) => {
         const {data} = await axios.post(`${baseURL}register`, {username, email, password}, config);
         console.log(data);
         dispatch({type: USER_REGISTER_SUCCESS, payload:data})
-        AsyncStorage.setItem("userInfo", JSON.stringify(data))
+       await AsyncStorage.setItem("userInfo", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 
@@ -149,7 +149,7 @@ export const updateuserimage = (idUser, avatar) => async (dispatch, getState) =>
         dispatch({type:USER_UPDATE_USER_IMAGE_SUCCESS, payload:data})
         
         console.log(data)
-        localStorage.setItem("updateImage", JSON.stringify(data))
+        await AsyncStorage.setItem("updateImage", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 
@@ -176,7 +176,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
         const {data} = await axios.post(`${baseURL}update-user/${user.idUser}`, user, config);
         dispatch({type:USER_UPDATE_PROFILE_SUCCESS, payload:data})
-        localStorage.setItem("updateprofile", JSON.stringify(data))
+       await AsyncStorage.setItem("updateprofile", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 
@@ -205,11 +205,11 @@ export const checkPassUser = (idUser,password) => async (dispatch) => {
         
         if(data) {
             dispatch({type:USER_CHECK_PASS_SUCCESS, payload:data})
-            localStorage.setItem("check", JSON.stringify(data))
+            AsyncStorage.setItem("check", JSON.stringify(data))
         }
         else {
             dispatch({type:USER_CHECK_PASS_FAIL, payload:data})
-            localStorage.setItem("check", JSON.stringify(data))
+            AsyncStorage.setItem("check", JSON.stringify(data))
         }
         
         
