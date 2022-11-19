@@ -1,10 +1,30 @@
 import { Box, Button, Center, HStack, ScrollView, Text, View } from 'native-base'
-import React from 'react'
+import React, {useEffect} from 'react'
 import Buttone from '../Components/Buttone'
 import CartEmpty from '../Components/CartEmpty'
 import CartItems from '../Components/CartItems'
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/Actions/CartActions"
 
-function CartScreen() {
+function CartScreen({route}) {
+
+  const dispatch = useDispatch();
+
+  const quantity = route.params[0];
+  const product = route.params[1];
+
+  
+
+ 
+
+  useEffect(()=> {
+    dispatch(addToCart(product._id, quantity))
+},[dispatch, product._id, quantity])
+
+const cart = useSelector((state)=> state.cart)
+  const {cartItems} = cart;
+  console.log(cartItems)
+
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" >
       <Center w="full" pu={5}>
@@ -14,7 +34,7 @@ function CartScreen() {
       </Center>
       {/* <CartEmpty/> */}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <CartItems/>
+        <CartItems cartItems={cartItems}/>
         <Center mt={5} >
           <HStack 
             rounded={50} 

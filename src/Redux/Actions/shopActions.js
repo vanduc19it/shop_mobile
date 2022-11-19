@@ -1,6 +1,8 @@
 import axios from "axios";
 import { CREATE_SHOP_FAIL, CREATE_SHOP_REQUEST, CREATE_SHOP_SUCCESS, GET_SHOP_FAIL, GET_SHOP_REQUEST, GET_SHOP_SUCCESS } from "../Constants/shopConstants";
 import {baseURL} from '../../Url'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 //TAO SHOP
 export const createShop = (idUser,nameShop, phoneShop, addressShop) => async (dispatch) => {
     try {
@@ -13,7 +15,7 @@ export const createShop = (idUser,nameShop, phoneShop, addressShop) => async (di
         const {data} = await axios.post(`${baseURL}shop/create-new`, {idUser, nameShop, phoneShop, addressShop}, config);
         console.log(data);
         dispatch({type: CREATE_SHOP_SUCCESS, payload:data})
-        localStorage.setItem("shopInfo", JSON.stringify(data))
+        await AsyncStorage.setItem("shopInfo", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 

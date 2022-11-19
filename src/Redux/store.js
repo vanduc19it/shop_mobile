@@ -31,39 +31,43 @@ const reducer = combineReducers({
 
 const getData = async () => {
     try {
-        const userInfoFromLocalStorage = await AsyncStorage.getItem("userInfo")
+        const userInfoFromAsyncStorage = await AsyncStorage.getItem("userInfo")
         ? JSON.parse(AsyncStorage.getItem("userInfo"))
         : null;
 
-        const shopInfoFromLocalStorage = AsyncStorage.getItem("shopInfo")
+        const shopInfoFromAsyncStorage = await AsyncStorage.getItem("shopInfo")
         ? JSON.parse(AsyncStorage.getItem("shopInfo"))
         : null;
 
-        const  cartItemsFromAsyncStorage = AsyncStorage.getItem("cartItems")
+        const  cartItemsFromAsyncStorage = await AsyncStorage.getItem("cartItems")
         ? JSON.parse(AsyncStorage.getItem("cartItems"))
         : []
 
+        // console.log(cartItemsFromAsyncStorage)
+
         //giao hang info
-        const  shippingInfoFromAsyncStorage = AsyncStorage.getItem("shippingInfo")
+        const  shippingInfoFromAsyncStorage = await AsyncStorage.getItem("shippingInfo")
         ? JSON.parse(AsyncStorage.getItem("shippingInfo"))
         : {}
     } catch(e) {
       // error reading value
+      console.log(e);
     }
   }
+  
 
 
 const initialState = {
     userLogin: {
-        userInfo:getData.userInfoFromLocalStorage,
+        userInfo:getData.userInfoFromAsyncStorage,
         
     },
     cart: {
-        cartItems: getData.cartItemsFromLocalStorage,
-        shippingInfo: getData.shippingInfoFromLocalStorage
+        cartItems: getData.cartItemsFromAsyncStorage, 
+        shippingInfo: getData.shippingInfoFromAsyncStorage
     },
     shopDetail: {
-        shopInfo:getData.shopInfoFromLocalStorage
+        shopInfo:getData.shopInfoFromAsyncStorage
     }
 }
 
