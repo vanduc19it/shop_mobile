@@ -7,9 +7,10 @@
     "icon": "./assets/shop.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/shop.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#66aff6"
+      "image": "./assets/shopping.jpg",
+      "resizeMode": "cover",
+      "backgroundColor": "#fff"
+      
     },
     "updates": {
       "fallbackToCacheTimeout": 0

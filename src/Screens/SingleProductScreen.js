@@ -7,22 +7,24 @@ import Review from '../Components/Review'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import {baseURL} from '../Url'
-import { listProductDetail } from '../Redux/Actions/ProductActions'
+import { addToCart } from '../Redux/Actions/CartActions'
 
 function SingleProductScreen({route}) {
 
   const navigation = useNavigation()
-
   const product = route.params;
-  
-  const [quantity, setQuantity] = useState(1)
-
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const {userInfo} = userLogin;
+  
+  const [quantity, setQuantity] = useState(0)
+
 
   // them sp vao gio hang 
   const handleAddToCart = () => {
-      navigation.navigate("Cart", [quantity, product])
-      
+      navigation.navigate("Cart")
+      dispatch(addToCart(userInfo.idUser, product, quantity))
   }
 
   return (
@@ -52,7 +54,7 @@ function SingleProductScreen({route}) {
               borderColor="#ccc" rounded textColor="#000" iconStyle={{color: "#000"}}
               rightButtonBackgroundColor="#66aff6"
               leftButtonBackgroundColor="#66aff6" 
-              onChange={(e) => setQuantity(e)}
+              onChange={(e) => console.log(e)}
           />
           <Spacer/>
           <Heading bold color="#000" fontSize={19}>{product.price} vnd</Heading>

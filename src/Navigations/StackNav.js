@@ -6,6 +6,8 @@ import SingleProductScreen from '../Screens/SingleProductScreen'
 import ShippingScreen from '../Screens/ShippingScreen'
 import PaymentScreen from '../Screens/PaymentScreen'
 import PlaceOrderScreen from '../Screens/PlaceOrderScreen'
+import Tabs from '../Components/Profile/Tabs'
+import EditProfile from '../Components/Profile/EditProfile'
 
 
 const Stack = createNativeStackNavigator()
@@ -22,6 +24,8 @@ export default function StackNav() {
          <Stack.Screen name="Shipping" component={ShippingScreen} />
          <Stack.Screen name="Checkout" component={PaymentScreen} />
          <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
+         <Stack.Screen name="Tab" component={Tabs} />
+         <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   )
 }
