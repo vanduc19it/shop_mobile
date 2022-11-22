@@ -17,7 +17,7 @@ function HomeProducts() {
     
     const productList = useSelector((state)=> state.productList);
     const {loading, error, products} = productList;
-    console.log(loading, error, products);
+  
 
     useEffect(()=> {
         dispatch(listProduct())

@@ -1,19 +1,19 @@
-import { Box, Button, Heading, Image, Input, Pressable, Text, View, VStack } from 'native-base'
+import { Box, Button, Heading, Image, Input, Pressable, Text, Icon, VStack, Center, Flex ,HStack} from 'native-base'
 import React, {useState} from 'react'
-import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from "react-redux";
 import { login } from '../Redux/Actions/userActions';
-
-
-
+import Buttone from '../Components/Buttone'
+import Colors from '../Colors'
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 function LoginScreen({navigation}) {
 
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("")
+const [email, setEmail] = useState("")
 const [password, setPassword] = useState("") 
 
 
@@ -25,55 +25,96 @@ const handleLogin = () => {
 const userLogin = useSelector((state) => state.userLogin);
 const { error, loading, userInfo} = userLogin;
 
+const [show, setShow] = React.useState(false);
   return (
-   <Box flex={1} bg="black">
-     <Image 
-        flex={1} 
-        alt="logo"
-        resizeMode="cover"
-        size="lg"
-        w="full"
-        source={require('../../assets/backgroundlogin.jpg')}
-        />
+   <Box flex={1} bg={Colors.white}>
       <Box 
         w="full"
-        h="full"
+        h="95%"
         position="absolute"
         top="0"
         px="6"
         justifyContent="center"
         >
-        <Heading>LOGIN</Heading>
-        <VStack space={8} pt="6">
+          <Center>
+            <Heading mb={8}>LOGIN</Heading>
+          </Center>
+       
+        <Image 
+          alt="logo"
+          resizeMode="contain"
+          size="xl"
+          w="full"
+          source={require('../../assets/giflogin.gif')}
+        />
+        
+        <VStack space={4} pt="10" pb={5}>
           <Input
             InputLeftElement={
-              <MaterialIcons name="email" size={24} color="black"  />
+              <Icon as={
+                <MaterialCommunityIcons name="email-outline" />
+                }
+                ml="4" 
+                color={Colors.black} 
+                size={6}
+              />
             }
+                
             variant="underlined" 
             placeholder='user@gmail.com' 
-            w="70%" 
-            color="white"
-            borderBottomColor="black"
+            w="100%" 
+            p={4}
+            color={Colors.black}
+            placeholderTextColor="blue"
+            rounded={50}
             pl={2} 
             value={email}
             onChangeText={(e) => setEmail(e)}
+            bg={Colors.submain}
+            borderBottomColor={Colors.white}
           />
+          {/* input password */}
           <Input
             InputLeftElement={
-              <Ionicons name="eye" size={24} color="black" />
+              <Icon as={
+                <AntDesign name="lock1"  />
+              }
+              color={Colors.black}
+              ml="4" 
+              size={6}
+              />
             }
+            InputRightElement={
+            <Pressable onPress={() => setShow(!show)}>
+              <Icon as={
+                <Ionicons name={show ? "md-eye-outline": "md-eye-off-outline"} />
+                } 
+              size={6} 
+              mr="4" 
+              color={Colors.black}
+              />
+            </Pressable>}
+
+            p={4}
             variant="underlined" 
             placeholder='**********' 
-            type="password"
-            w="70%" 
-            color="white"
-            borderBottomColor="black"
+            type={show ? "text" : "password"}
+            w="100%" 
+            color={Colors.black}
+            rounded={50}
             pl={2} 
+            borderBottomColor={Colors.white}
+            bg={Colors.submain}
             value={password}
             onChangeText={(e) => setPassword(e)}
+            
           />
+          <Flex alignItems="flex-end" mr="1">
+             <Text italic color={Colors.gray}>Forgot Password</Text>
+          </Flex>
+         
         </VStack> 
-        <Button 
+        <Buttone
           _pressed={{
             bg: "#1cef58"
           }}
@@ -83,15 +124,42 @@ const { error, loading, userInfo} = userLogin;
           my={30} 
           w="40" 
           rounded={50} 
-          bg="#f7dd18"
+          bg={Colors.main}
           onPress={handleLogin}
+          color={Colors.black}
         >
           LOGIN
-        </Button>
-        <Pressable mt={4} onPress={() => navigation.navigate("Register")}>
-          <Text color="#1cef58">
-            SIGN UP
-          </Text>
+        </Buttone>
+        <Center >
+          <Text color={Colors.gray} italic mt={2}>__________ OR ___________</Text>
+        </Center>
+        {/* fb and gg */}
+        <Center mt={5} mb={0}>
+          <HStack space={3}>
+            <Button w="50" h="50" rounded="full" bg={Colors.submain}>
+              <Image 
+                alt="fb"
+                resizeMode="contain"
+                source={require('../../assets/gg.png')}
+              />
+            </Button>
+            <Button w="50" h="50" rounded="full" bg={Colors.submain}>
+              <Image 
+                alt="fb"
+                resizeMode="contain"
+                source={require('../../assets/fb.png')}
+              />
+            </Button>
+          </HStack>
+        </Center>
+       
+        
+        <Pressable mt={8} onPress={() => navigation.navigate("Register")}>
+          <Center>
+            <Text color={Colors.lightblue} italic >
+              Create An Account
+            </Text>
+          </Center>
         </Pressable>
      </Box>
    </Box>

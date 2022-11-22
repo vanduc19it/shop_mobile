@@ -5,17 +5,18 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { productCreateFeedbackReducer, productDetailReducer, productGetFeedbackReducer, productListReducer, productSearchReducer } from "./Reducers/ProductReducers";
 import { checkPassReducer, userDetailReducer, userLoginReducer, userRegisterReducer, userUpdateImageReducer, userUpdateProfileReducer } from "./Reducers/userReducers";
-import { cartReducer } from "./Reducers/CartReducers";
+import { cartReducer, getcartReducer } from "./Reducers/CartReducers";
 import { orderCreateReducer, orderDetailReducer, orderSingleReducer } from "./Reducers/orderReducers";
 import { createShopReducer, shopDetailReducer } from "./Reducers/shopReducers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const reducer = combineReducers({
     productList: productListReducer,
     productSearch: productSearchReducer,
     productDetail: productDetailReducer,
     productCreateFeedback: productCreateFeedbackReducer,
     productGetFeedback: productGetFeedbackReducer,
-    cart: cartReducer,
+    cart: getcartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetail: userDetailReducer,
@@ -29,46 +30,55 @@ const reducer = combineReducers({
     shopDetail: shopDetailReducer,
 })
 
-const getData = async () => {
-    try {
-        const userInfoFromAsyncStorage = await AsyncStorage.getItem("userInfo")
-        ? JSON.parse(AsyncStorage.getItem("userInfo"))
-        : null;
 
-        const shopInfoFromAsyncStorage = await AsyncStorage.getItem("shopInfo")
-        ? JSON.parse(AsyncStorage.getItem("shopInfo"))
-        : null;
+        // const userInfoFromAsyncStorage = AsyncStorage.getItem("userInfo")
+        // ? (AsyncStorage.getItem("userInfo"))
+        // : null;
 
-        const  cartItemsFromAsyncStorage = await AsyncStorage.getItem("cartItems")
-        ? JSON.parse(AsyncStorage.getItem("cartItems"))
-        : []
+        // const shopInfoFromAsyncStorage = AsyncStorage.getItem("shopInfo")
+        // ? (AsyncStorage.getItem("shopInfo"))
+        // : null;
 
-        // console.log(cartItemsFromAsyncStorage)
+        // const  cartItemsFromAsyncStorage = AsyncStorage.getItem("cartItems")
+        // ? (AsyncStorage.getItem("cartItems"))
+        // : []
 
-        //giao hang info
-        const  shippingInfoFromAsyncStorage = await AsyncStorage.getItem("shippingInfo")
-        ? JSON.parse(AsyncStorage.getItem("shippingInfo"))
-        : {}
-    } catch(e) {
-      // error reading value
-      console.log(e);
-    }
-  }
+        // //giao hang info
+        // const  shippingInfoFromAsyncStorage = AsyncStorage.getItem("shippingInfo")
+        // ? (AsyncStorage.getItem("shippingInfo"))
+        // : {}
+ 
   
+// const hello = () => {
+//     const [a, setA] = useState([])
+//     AsyncStorage.getItem("cartItems").then( data=> {
+//         setA(data)
+//     })
+//     console.log(a)
+// }
+// const a = []
+// AsyncStorage.getItem("cartItems").then(data=> {
+//     $a = data;  
+    
+    
+// })
+// console.log(a)
+// console.log(AsyncStorage.getItem("cartItems"))
+
 
 
 const initialState = {
-    userLogin: {
-        userInfo:getData.userInfoFromAsyncStorage,
+    // userLogin: {
+    //     userInfo:userInfoFromAsyncStorage,
         
-    },
-    cart: {
-        cartItems: getData.cartItemsFromAsyncStorage, 
-        shippingInfo: getData.shippingInfoFromAsyncStorage
-    },
-    shopDetail: {
-        shopInfo:getData.shopInfoFromAsyncStorage
-    }
+    // },
+    // cart: {
+    //     cartItems: cartItemsFromAsyncStorage, 
+    //     shippingInfo: shippingInfoFromAsyncStorage
+    // },
+    // shopDetail: {
+    //     shopInfo:shopInfoFromAsyncStorage
+    // }
 }
 
 const middleware = [thunk]

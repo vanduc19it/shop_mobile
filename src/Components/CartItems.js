@@ -1,72 +1,95 @@
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import React from 'react'
-import { Box, Button, HStack, VStack } from 'native-base'
+import { Box, Button, Center, HStack, Image, Pressable, VStack,ScrollView } from 'native-base'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { FontAwesome5 } from '@expo/vector-icons';
+import {baseURL} from '../Url'
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const Swiper =() => {
-  
-    <SwipeListView
-        rightOpenValue={-50}
-        previewRowKey="0"
-        previewOpenValue={-40}
-        previewOpenDelay={3000}
-        data={products.slide(0,2)}
-        renderHiddenItem={renderhidenItems}
-        renderItem={renderItems}
-        showsVerticalScrollIndicator={false}/>
+
     
-}
-const renderItems = (data, rowMap) => {
+const renderitem = (data) => (
   <Pressable>
     <Box ml={6} mb={3}>
-    <HStack 
-      alignItems="center" 
-      bg="#fff" 
-      shadow={1} 
-      rounded={10} 
-      overflow="hidden"
-    >
-    <Center w="25%" bg="#ccc">
-      <Image source={{uri: data.item.image}} alt={data.item.name} 
-            w="full"
-            h={24}
-            resizeMode="contain"
-      />
-    </Center>
-    <VStack w="60%" px={2} space={3}>
-      <Text isTruncated color="#000" bold fontSize={14}>
-        {data.item.name}
-      </Text>
-      <Text bold color="#000">{data.item.price} vnd</Text>
-    </VStack>
-        <Center>
-          <Button bg="#ccc" _pressed={{bg: "#ddd"}} _text={{
-            color: "#fff",
-          }}>5</Button>
-        </Center>
+      <HStack 
+        alignItems="center" 
+        bg="#fff" 
+        shadow={1} 
+        rounded={10} 
+        overflow="hidden"
+      >
+      <Center w="25%" bg="#fff">
+        <Image 
+          source={{uri: `${baseURL}images/products/` + data.item.product.imgProduct}}
+          alt={data.item.product.nameProduct} 
+          w="full"
+          h={24}
+          resizeMode="contain"
+        />
+      </Center>
+      <VStack w="60%" px={2} space={3}>
+        <Text isTruncated color="#000" bold fontSize={15}>
+          {data.item.product.nameProduct}
+        </Text>
+        <Text bold color="#000">{data.item.product.unit_price} vnd</Text>
+      </VStack>
+          <Center>
+            <Button bg="#000" _pressed={{bg: "#000"}} _text={{
+              color: "#fff",
+            }}>{data.item.product.quantity}</Button>
+          </Center>
       </HStack>
-
     </Box>
-  </Pressable>
+  </Pressable> 
+)
+
+const hidenItem = () => {
+//   const handleRemoveCart = ()=> {
+//     const navigation = useNavigation()
+//      navigation.navigate("Home")
+//      // dispatch(addToCart(userInfo.idUser, product, quantity))
+//  }
+
+ return (
+    <Pressable
+        w={50} 
+        roundedTopRight={10} 
+        roundedBottomRight={10} 
+        h='88%' 
+        ml='auto'
+        justifyContent="center" 
+        bg="#333"
+        onPress={handleRemoveCart}
+      >
+        <Center alignItems="center" space={2}>
+          <FontAwesome5 name="trash" size={24} color="#fff" />
+        </Center>
+      </Pressable>
+ )
+  
 }
 
-const renderhidenItems = (data) => {
-  <Pressable w={50} roundedTopRight={10} roundedBottomRight={10} h='88%' ml='auto'
-  justifyContent="center" bg="#333"
-  >
-    <Center alignItems="center" space={2}>
-      <FontAwesome5 name="trash" size={24} color="#fff" />
-    </Center>
-  </Pressable>
-}
+const CartItems = (prop) => {
+  const datta = prop.cartItems;
+  console.log(datta);
+  
 
-export default function CartItems() {
   return (
     <Box mr={6}>
-      {/* <Swiper/> */}
+       {/* <SwipeListView
+          rightOpenValue={-50}
+          previewRowKey="0"
+          previewOpenValue={-40}
+          previewOpenDelay={3000}
+          data={datta}
+          renderItem={renderitem}
+          renderHiddenItem={hidenItem}
+          showsVerticalScrollIndicator={false}
+       /> */}
     </Box>
-  )
-}
+  );
+};
+
+export default CartItems;

@@ -4,32 +4,31 @@ import Buttone from '../Components/Buttone'
 import CartEmpty from '../Components/CartEmpty'
 import CartItems from '../Components/CartItems'
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../Redux/Actions/CartActions"
+import { addToCart, getCart } from "../Redux/Actions/CartActions"
 
-function CartScreen({route}) {
+
+function CartScreen() {
 
   const dispatch = useDispatch();
 
-  const quantity = route.params[0];
-  const product = route.params[1];
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo} = userLogin;
 
-  
 
- 
+useEffect(()=> {
+    dispatch(getCart(userInfo.idUser))
+},[dispatch, userInfo.idUser])
 
-  useEffect(()=> {
-    dispatch(addToCart(product._id, quantity))
-},[dispatch, product._id, quantity])
 
 const cart = useSelector((state)=> state.cart)
-  const {cartItems} = cart;
-  console.log(cartItems)
+const {cartItems} = cart;
+
 
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" >
-      <Center w="full" pu={5}>
+      <Center w="full" pu={5} pt={4} pb={4}>
         <Text color="#000" fontSize={20} bold>
-          Gio Hang
+          MY CART
         </Text>
       </Center>
       {/* <CartEmpty/> */}

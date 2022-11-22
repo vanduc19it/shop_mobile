@@ -53,12 +53,10 @@ export default function Review({product}) {
 
             
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Box p={3} bg={Colors.gray} mt={5} rounded={5}>
-            {
-              feedbacks.map((feedback, index) => (
-                <>
-                <Box>
-                  <Flex direction="row" key={index} >
+            { feedbacks.map((feedback, index) => (
+              <Box p={3} bg={Colors.gray} mt={5} rounded={5} key={index}>
+                <Box >
+                  <Flex direction="row"  >
                   <Image source={{uri: `${baseURL}images/users/` + feedback.user.avatar}} 
                   w={10}
                   h={30}
@@ -77,11 +75,10 @@ export default function Review({product}) {
               
               <Text my={2} fontSize={11}>{moment(Number(feedback.createAt)).locale("vi").startOf("second").fromNow() }</Text>
               <Message children={feedback.comment}/>
-              </>
-              ))
-            }
             
             </Box>
+            ))
+            }
             </ScrollView>
            
           )

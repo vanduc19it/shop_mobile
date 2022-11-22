@@ -67,7 +67,7 @@ export const getProductFeedback = (idProduct) => async (dispatch) => {
         dispatch({type: PRODUCT_GET_FEEDBACK_REQUEST});
         const {data} = await axios.get(`${baseURL}get-feedback/${idProduct}/all`);
         dispatch({type:PRODUCT_GET_FEEDBACK_SUCCESS, payload:data})
-        console.log(data)
+        
         
         
     } catch (error) {
