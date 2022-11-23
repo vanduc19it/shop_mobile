@@ -96,7 +96,7 @@ export const getUserDetail = (id) => async (dispatch, getState) => {
             }
         }
         const {data} = await axios.get(`${baseURL}get-normal-user/${id}`, config);
-        console.log(data);
+
         dispatch({type: USER_DETAIL_SUCCESS, payload:data})
         
     } catch (error) {
@@ -162,7 +162,7 @@ export const updateuserimage = (idUser, avatar) => async (dispatch, getState) =>
     }
 }
 
-export const updateUserProfile = (user) => async (dispatch, getState) => {
+export const updateUserProfile = (idUser, name, email, address, gender) => async (dispatch, getState) => {
     try {
         dispatch({type: USER_UPDATE_PROFILE_REQUEST});
         const {
@@ -174,9 +174,15 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
                 Authorization: `${userInfo.token}`
             }
         }
-        const {data} = await axios.post(`${baseURL}update-user/${user.idUser}`, user, config);
+        const {data} = await axios.post(`${baseURL}update-user/${idUser}`, {
+            username: name,
+            email: email,
+            address: address,
+            gender: gender,
+
+        }, config);
         dispatch({type:USER_UPDATE_PROFILE_SUCCESS, payload:data})
-       await AsyncStorage.setItem("updateprofile", JSON.stringify(data))
+    //    await AsyncStorage.setItem("updateprofile", JSON.stringify(data))
         
     } catch (error) {
         dispatch({ 
