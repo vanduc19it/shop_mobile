@@ -2,7 +2,7 @@ import { Box, Button, Heading, Image, Input, Pressable, Text, Icon, VStack, Cent
 import React, {useState} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from "react-redux";
-import { login } from '../Redux/Actions/userActions';
+import { getUserDetail, login } from '../Redux/Actions/userActions';
 import Buttone from '../Components/Buttone'
 import Colors from '../Colors'
 import { AntDesign } from '@expo/vector-icons';
@@ -16,14 +16,15 @@ const dispatch = useDispatch();
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("") 
 
+const userLogin = useSelector((state) => state.userLogin);
+const {userInfo} = userLogin;
 
 const handleLogin = () => {
   dispatch(login(email, password))
   navigation.navigate("Bottom")
+  
 }
 
-const userLogin = useSelector((state) => state.userLogin);
-const { error, loading, userInfo} = userLogin;
 
 const [show, setShow] = React.useState(false);
   return (

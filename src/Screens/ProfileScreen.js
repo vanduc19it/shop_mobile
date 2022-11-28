@@ -1,5 +1,5 @@
 import { Badge, Box, Center, Divider, Flex, Heading, HStack, Image, Pressable, Text, View, VStack, ScrollView, Button } from 'native-base'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Tabs from '../Components/Profile/Tabs'
 import { useDispatch, useSelector } from "react-redux";
 import {baseURL} from '../Url'
@@ -14,6 +14,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { getUserDetail } from '../Redux/Actions/userActions';
 
 
 function ProfileScreen() {
@@ -25,6 +26,11 @@ function ProfileScreen() {
   const userLogin = useSelector((state)=> state.userLogin)
   const {userInfo} = userLogin;
 
+  
+  useEffect(()=> {
+    dispatch(getUserDetail(userInfo.idUser));
+  },[dispatch, userInfo.idUser]);
+
 
 
   return (
@@ -34,16 +40,17 @@ function ProfileScreen() {
    
     <Flex alignItems="flex-end" mr="1" >
       <HStack pb={4} >
-        <VStack pr={5} pt={3}>
+        <VStack pr={2} pt={3}>
           <Ionicons  name="settings-outline" size={25} color={Colors.white} alignSelf="flex-end"/>
         </VStack>
-        <VStack pr={6}>
-          <Badge colorScheme="error"  rounded="full" zIndex={1} mb={-3} mr={-4} variant="solid" alignSelf="flex-end" borderColor={Colors.white}>
+        
+        <VStack pr={4} pl={3} onPress={() => navigation.navigate("Cart")} >
+          <Badge onPress={() => navigation.navigate("Cart")} colorScheme="error"  rounded="full" zIndex={1} mb={-3} mr={-4} variant="solid" alignSelf="flex-end" borderColor={Colors.white}>
             10
           </Badge>
-          <AntDesign name="shoppingcart" size={26} color={Colors.white} />
+          <AntDesign name="shoppingcart" size={26} color={Colors.white} onPress={() => navigation.navigate("Cart")}/>
         </VStack>
-        <VStack >
+        <VStack pl={3} >
            <Badge colorScheme="error"  rounded="full" zIndex={1} mb={-3} mr={-4} variant="solid" alignSelf="flex-end" borderColor={Colors.white}>
             10
           </Badge>

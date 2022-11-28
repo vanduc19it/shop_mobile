@@ -6,6 +6,8 @@ import { listProduct} from "../Redux/Actions/ProductActions";
 import { useNavigation } from '@react-navigation/native';
 
 import {baseURL} from '../Url'
+import Slider from './Slider';
+import Category from './Category';
 
 function HomeProducts() {
 
@@ -26,6 +28,8 @@ function HomeProducts() {
     
   return (
     <ScrollView flex={1} showsVerticalScrollIndicator={false}>
+          <Slider/>
+        <Category/>
         <Flex 
             flexWrap="wrap" 
             direction="row" 
