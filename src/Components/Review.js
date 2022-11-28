@@ -1,6 +1,6 @@
 import { Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, Image, Flex } from 'native-base'
+import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, useToast, Image, Flex } from 'native-base'
 import Ratingg from './Rating'
 import Message from './Notifications/Message'
 import Buttone from '../Components/Buttone'
@@ -28,15 +28,27 @@ export default function Review({product}) {
   //dispatch get comment
   useEffect(()=> {
     dispatch(getProductFeedback(product._id))
+
   },[dispatch,product._id])
 
+  const toast = useToast()
   //danh gia san phan
   const handleReview = (e) => {
     e.preventDefault();
     if(comment != '' && rating > 0 ) {
       dispatch(createProductFeedback(product._id, userInfo.idUser, rating, comment));
+      toast.show({
+        render: () => {
+          return <Box bg="emerald.500" px="2" py="1" rounded="sm" mb={5}>
+                  Đánh giá sản phẩm thành công!
+                </Box>;
+        },
+        duration: 2000,
+      })
     }
-  }
+   
+    }
+  
 
 
   return (

@@ -1,7 +1,9 @@
-import { HStack, Input, Pressable, Text, Box } from 'native-base'
+import { HStack, Input, Pressable, Text, Box, Icon } from 'native-base'
 import React from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../Colors'
+import { EvilIcons } from '@expo/vector-icons';
 
 export default function HomeSearch() {
     const navigation = useNavigation()
@@ -10,21 +12,23 @@ export default function HomeSearch() {
         space={3} 
         w="full" 
         px={6} 
-        bg="#66aff6" 
+        bg={Colors.main} 
         py={4} 
         alignItems="center"
         safeAreaTop
     >
-        <Input placeholder="ao, quan,..."
+        <Input placeholder="Tìm kiếm sản phẩm"
             w="85%"
-            bg="#fff"
+            bg={Colors.white}
             type="search"
             variant="filled"
             h={12}
+            fontSize={14}
             borderWidth={0}
             _focus={{
-                bg: "#fff"
+                bg: Colors.white
             }}
+            InputLeftElement={<Icon as={<EvilIcons name="search"  />} size={7} ml="2" color={Colors.black} />}
         />
         <Pressable ml={3} onPress={() => navigation.navigate("Cart")}>
             <FontAwesome name="shopping-bag" size={24} color="black" />
