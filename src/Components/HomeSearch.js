@@ -1,12 +1,21 @@
 import { HStack, Input, Pressable, Text, Box, Icon } from 'native-base'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../Colors'
 import { EvilIcons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCart } from '../Redux/Actions/CartActions';
 
 export default function HomeSearch() {
     const navigation = useNavigation()
+ 
+  
+  
+  const cart = useSelector((state)=> state.cart)
+  const {cartItems} = cart;
+
+  console.log(cartItems)
   return (
     <HStack 
         space={3} 
@@ -38,7 +47,7 @@ export default function HomeSearch() {
                 fontSize:"11px" 
                  }}
             >
-                5   
+                {/* {cartItems.length}    */}5
             </Box>
         </Pressable>
     </HStack>

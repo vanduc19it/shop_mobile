@@ -3,20 +3,18 @@ import React from 'react'
 import { Box, Center } from 'native-base'
 import { Entypo } from '@expo/vector-icons';
 import Buttone from './Buttone';
+import Colors from '../Colors'
 
 export default function CartEmpty() {
   return (
-    <Box flex={1} px={4}>
-        <Center h='90%'>
-            <Center w={200} h={200} bg="#fff" rounded="full">
-            <Entypo name="shopping-bag" size={64} color="#66aff6" />
+    <Box flex={1} px={4} bg={Colors.green}>
+        <Center h='80%'>
+            <Center w={200} h={200} bg="#fff" rounded="full" mb={4}>
+              <Entypo name="shopping-bag" size={64} color="#66aff6" />
             </Center>
-            <Text color="#fff" bold mt={5}>
-                GIO HANG TRONG
-            </Text>
+            <Text color={Colors.white} bold mt={10} fontSize={24}>GIỎ HÀNG TRỐNG</Text>
         </Center>
-        <Buttone bg="#000" color="#fff">SHOOPING THUI</Buttone>
-        
+        <Buttone bg="#000" color="#fff" mb={30} >SHOPING THUI</Buttone>   
     </Box>
   )
 }
