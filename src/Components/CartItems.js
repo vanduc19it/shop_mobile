@@ -1,94 +1,129 @@
-import { Text } from 'react-native'
+import {  Dimensions } from 'react-native'
 import React from 'react'
-import { Box, Button, Center, HStack, Image, Pressable, VStack,ScrollView } from 'native-base'
+import { Text, Box, Button, Center, HStack, Image, Pressable, VStack,ScrollView, Flex, Checkbox, Divider } from 'native-base'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { FontAwesome5 } from '@expo/vector-icons';
 import {baseURL} from '../Url'
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../Colors'
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import NumericInput from "react-native-numeric-input"
+import { useDispatch } from 'react-redux';
 
-
-
-
-    
-const renderitem = (data) => (
-  <Pressable>
-    <Box ml={6} mb={3}>
-      <HStack 
-        alignItems="center" 
-        bg="#fff" 
-        shadow={1} 
-        rounded={10} 
-        overflow="hidden"
-      >
-      <Center w="25%" bg="#fff">
-        <Image 
-          source={{uri: `${baseURL}images/products/` + data.item.product.imgProduct}}
-          alt={data.item.product.nameProduct} 
-          w="full"
-          h={24}
-          resizeMode="contain"
-        />
-      </Center>
-      <VStack w="60%" px={2} space={3}>
-        <Text isTruncated color="#000" bold fontSize={15}>
-          {data.item.product.nameProduct}
-        </Text>
-        <Text bold color="#000">{data.item.product.unit_price} vnd</Text>
-      </VStack>
-          <Center>
-            <Button bg="#000" _pressed={{bg: "#000"}} _text={{
-              color: "#fff",
-            }}>{data.item.product.quantity}</Button>
-          </Center>
-      </HStack>
-    </Box>
-  </Pressable> 
-)
-
-const hidenItem = () => {
-//   const handleRemoveCart = ()=> {
-//     const navigation = useNavigation()
-//      navigation.navigate("Home")
-//      // dispatch(addToCart(userInfo.idUser, product, quantity))
-//  }
-
- return (
-    <Pressable
-        w={50} 
-        roundedTopRight={10} 
-        roundedBottomRight={10} 
-        h='88%' 
-        ml='auto'
-        justifyContent="center" 
-        bg="#333"
-        onPress={handleRemoveCart}
-      >
-        <Center alignItems="center" space={2}>
-          <FontAwesome5 name="trash" size={24} color="#fff" />
-        </Center>
-      </Pressable>
- )
-  
-}
 
 const CartItems = (prop) => {
   const datta = prop.cartItems;
   console.log(datta);
+  const dispatch = useDispatch();
   
+  const navigation = useNavigation()
+  // const [quantity, setQuantity] = useState(0)
+  const WIDTH = Dimensions.get('window').width;
+
+  const handleRemove = () => {
+    navigation.navigate("Home")
+
+    console.log(a)
+    
+  }
 
   return (
-    <Box mr={6}>
-       {/* <SwipeListView
-          rightOpenValue={-50}
-          previewRowKey="0"
-          previewOpenValue={-40}
-          previewOpenDelay={3000}
-          data={datta}
-          renderItem={renderitem}
-          renderHiddenItem={hidenItem}
-          showsVerticalScrollIndicator={false}
-       /> */}
-    </Box>
+  <ScrollView w="full" bg={Colors.submain}  showsVerticalScrollIndicator={false}>
+
+          {
+            datta.map((item, index) => (
+              <ScrollView  showsVerticalScrollIndicator={false} horizontal  mt={2} key={index}>
+              <HStack bg={Colors.white} w={WIDTH} >
+
+                  <Box bg={Colors.white} w="12%" h="full"> 
+                      <Flex alignSelf="center">
+                          <Center  flex={1}>
+                              <Checkbox value="test"colorScheme="green" rounded="full"  accessibilityLabel="This is checkbox" defaultIsChecked />
+                          </Center>
+                      </Flex>
+                  </Box>
+
+                  <Box bg={Colors.white} w="88%" mb={3}>
+
+                    <VStack>
+                        <HStack space={2} mb={3} mt={3}>
+                            <Image 
+                                source={{uri: "https://cdn.pixabay.com/photo/2022/11/20/21/18/africa-7605276_960_720.jpg"}} 
+                                alt="abc" 
+                                h={30}  w={30}
+                                resizeMode="stretch"
+                                rounded="full"
+                            />
+                            <Center>
+                                <Text>SHOPABC</Text>
+                            </Center>
+                            <Center>
+                                <AntDesign name="right" size={14} color="#ccc" />
+                            </Center>
+                        </HStack>
+                        <HStack space={5}>
+                            
+                            <Image 
+                                source={{uri: `${baseURL}images/products/${item.product.imgProduct}`}} 
+                                alt="abc" 
+                                h={100}  w={100}
+                                resizeMode="stretch"
+                                onPress={() => navigation.navigate("SingleProductScreen", item.product)}
+                            />
+                            <VStack space={2}> 
+                              <Text w="80%" bold>{item.product.nameProduct}</Text>
+
+                              <NumericInput
+              
+                                  totalwidth={120} 
+                                  totalHeight={30} 
+                                  iconSize={25} 
+                                  step={1} 
+                                  maxValue={15} 
+                                  minValue={0}
+                                  borderColor={Colors.gray} 
+                                  rounded 
+                                  textColor="#000" 
+                                  iconStyle={{color: "#000"}}
+                                  rightButtonBackgroundColor={Colors.white}
+                                  leftButtonBackgroundColor={Colors.white} 
+                                  onChange={(e) => console.log(e)}
+                              />
+                              <Text bold>Giá: {item.product.unit_price} đ</Text>
+                            </VStack>
+                           
+                        </HStack>
+                    </VStack>
+                  </Box>
+            </HStack>
+
+                {/* nut delete */}
+                <Pressable bg={Colors.red} w={WIDTH*0.19} onPress={handleRemove} >
+                  <Flex alignSelf="center" >
+                      <Center  flex={1}>
+                        <Ionicons name="trash" size={34} color="white" /> 
+                      </Center>
+                  </Flex>
+                </Pressable>
+          </ScrollView> 
+
+            ))
+          }
+      
+          
+        
+
+          
+
+          
+         
+          
+
+   
+
+        
+    </ScrollView>
   );
 };
 

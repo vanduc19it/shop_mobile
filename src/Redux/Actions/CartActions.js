@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CART_ADD_PRODUCTS_REQUEST,CART_ADD_PRODUCTS_SUCCESS,CART_ADD_PRODUCTS_FAIL, CART_REMOVE_PRODUCTS, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_INFO, GET_CART_FAIL, GET_CART_REQUEST, GET_CART_SUCCESS } from "../Constants/CartConstants";
+import { CART_ADD_PRODUCTS_REQUEST,CART_ADD_PRODUCTS_SUCCESS,CART_ADD_PRODUCTS_FAIL, CART_REMOVE_PRODUCTS, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_INFO, GET_CART_FAIL, GET_CART_REQUEST, GET_CART_SUCCESS, CART_REMOVE_PRODUCTS_REQUEST, CART_REMOVE_PRODUCTS_SUCCESS, CART_REMOVE_PRODUCTS_FAIL } from "../Constants/CartConstants";
 
 import {baseURL} from '../../Url'
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -53,12 +53,26 @@ export const addToCart = (idUser, product, quantity) => async (dispatch) => {
 
 
 //remove product to cart
-export const removeFromCart = (id) => async (dispatch, getState) => {
+export const removeFromCart = (idUser, idProduct) => async (dispatch) => {
     
-    dispatch({
-        type: CART_REMOVE_PRODUCTS,
-        payload: id, 
-    });
+    try {
+        dispatch({type: CART_REMOVE_PRODUCTS_REQUEST});
+        const {data} = await axios.post( `${baseURL}cart/remove-product-cart`, {
+            idUser: idUser, 
+            idProduct: idProduct,
+            
+        });
+        dispatch({type:CART_REMOVE_PRODUCTS_SUCCESS, payload:data})    
+        
+    } catch (error) {
+        dispatch({ 
+            type: CART_REMOVE_PRODUCTS_FAIL,
+            payload:
+            error.response && error.response.data.message 
+            ? error.response.data.message
+            : error.message,
+        });
+    }
         
     //   AsyncStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 }

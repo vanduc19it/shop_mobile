@@ -5,11 +5,17 @@ import CartEmpty from '../Components/CartEmpty'
 import CartItems from '../Components/CartItems'
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, getCart } from "../Redux/Actions/CartActions"
+import Colors from '../Colors'
+import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 function CartScreen() {
 
   const dispatch = useDispatch();
+
+  const navigation = useNavigation()
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo} = userLogin;
@@ -25,46 +31,51 @@ const {cartItems} = cart;
 
 
   return (
-    <Box flex={1} safeAreaTop bg="#66aff6" >
-      <Center w="full" pu={5} pt={4} pb={4}>
-        <Text color="#000" fontSize={20} bold>
-          MY CART
-        </Text>
-      </Center>
-      {/* <CartEmpty/> */}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <CartItems cartItems={cartItems}/>
-        <Center mt={5} >
-          <HStack 
-            rounded={50} 
-            justifyContent="space-between" 
-            bg="#fff" 
-            shadow={2} 
-            w="90%"
-            pl={5}
-            h={45}
-            alignItems="center"
-          >
-            <Text>Total</Text>
-            <Button px={10} h={45} rounded={50} bg="#66aff6" 
-              _text= {{
-                color: "#fff",
-                fontWeight: "semibold",
-
-              }}
-              _pressed={{
-                bg: "#66aff6"
-              }}
-
-            >123 vnd</Button>
-          </HStack>
+    <Box flex={1} safeAreaTop bg={Colors.main} >
+      <HStack>
+        <Center ml={4}>
+        <AntDesign name="leftcircleo" size={24} color={Colors.black} onPress={() => navigation.navigate("Home")} />
         </Center>
-        <Center px={5}>
-              <Buttone bg="#000" color="#fff" mt={10}>
-                CHECKOUT
-              </Buttone>
-        </Center>
-      </ScrollView>
+     
+          <Center w="full"  pt={4} pb={4} pr={10} >
+            <Text color={Colors.white} fontSize={18} bold >
+              Giỏ hàng ({cartItems.length})
+            </Text>
+          </Center>
+      </HStack>
+
+      {
+        cartItems.length ?
+         (
+          <>
+             <CartItems cartItems={cartItems}/>
+
+              <HStack  bg={Colors.white} borderColor={Colors.gray} borderWidth={1} shadow={1}>
+                <Center>
+                <Text bold italic fontSize={15} p={8}>Tổng tiền: <Text color={Colors.red}>1234500 đ</Text></Text>
+                </Center>
+                
+                <Center>
+                  <Button 
+                      bg={Colors.red} 
+                      color={Colors.white}  
+                      rounded={0} ml={4} 
+                      leftIcon={<MaterialCommunityIcons name="cart-variant" size={24} color="white" />}
+                  >
+                        Mua hàng 
+                  </Button>
+                </Center>
+              </HStack>
+          </>
+        )
+
+        : (
+          <CartEmpty/>
+        )
+      }
+      
+       
+    
     </Box>
 
   )
