@@ -2,6 +2,7 @@ import { Box, Center, FormControl, HStack, Image, Input, ScrollView, Spacer, Tex
 import React from 'react'
 import Buttone from '../Components/Buttone'
 import {Ionicons,FontAwesome} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 const paymentMethods = [
   {
     image: require("../../assets/shop.png"), 
@@ -22,6 +23,7 @@ const paymentMethods = [
 ]
 
 function PaymentScreen() {
+  const navigation = useNavigation()
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" py={5}> 
     <Center pb={15}>
@@ -61,7 +63,7 @@ function PaymentScreen() {
             </HStack>
           ))}
         
-          <Buttone bg="#66aff6" color="#fff">CONTINUE</Buttone>
+          <Buttone bg="#66aff6" color="#fff" onPress={()=> navigation.navigate("Order")}>CONTINUE</Buttone>
           <Text italic textAlign="center">Payment method is <Text italic bold>Shipcod</Text>
           </Text>
         </VStack>

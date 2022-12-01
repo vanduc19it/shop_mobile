@@ -28,6 +28,8 @@ export default function StackNav() {
          <Stack.Screen name="Tab" component={Tabs} />
          <Stack.Screen name="EditProfile" component={EditProfile} />
          <Stack.Screen name="Profile" component={ProfileScreen} />
+         <Stack.Screen name="Payment" component={PaymentScreen} />
+         
     </Stack.Navigator>
   )
 }
