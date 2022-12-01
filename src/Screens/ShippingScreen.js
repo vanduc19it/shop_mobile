@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { Box, Center, FormControl, Input, ScrollView, Text, VStack} from 'native-base'
 import React from 'react'
 import Buttone from '../Components/Buttone'
@@ -21,6 +22,7 @@ const ShippingInputs = [
 ]
 
 function ShippingScreen() {
+  const navigation = useNavigation()
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" py={5}> 
       <Center pb={15}>
@@ -58,7 +60,7 @@ function ShippingScreen() {
               />
             </FormControl>
             ))}
-            <Buttone bg="#66aff6" color="#fff">CONTINUE</Buttone>
+            <Buttone bg="#66aff6" color="#fff" onPress={()=> navigation.navigate("Payment")}>CONTINUE</Buttone>
 
           </VStack>
         </ScrollView>

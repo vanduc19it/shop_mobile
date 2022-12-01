@@ -7,8 +7,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import OrderItems from '../Components/OrderItems';
 import PlaceOrderModel from '../Components/PlaceOrderModel';
+import { useNavigation } from '@react-navigation/native';
 
 function PlaceOrderScreen() {
+  const navigation = useNavigation()
   return (
    <Box bg={Colors.main} flex={1} safeArea pt={6}>
      <Box>

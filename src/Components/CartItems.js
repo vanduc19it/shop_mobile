@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import NumericInput from "react-native-numeric-input"
 import { useDispatch } from 'react-redux';
+import { removeFromCart } from '../Redux/Actions/CartActions';
 
 
 const CartItems = (prop) => {
@@ -21,11 +22,10 @@ const CartItems = (prop) => {
   // const [quantity, setQuantity] = useState(0)
   const WIDTH = Dimensions.get('window').width;
 
-  const handleRemove = () => {
+  const handleRemove = (idUser, idProduct) => {
     navigation.navigate("Home")
+    dispatch(removeFromCart(idUser, idProduct))
 
-    console.log(a)
-    
   }
 
   return (
@@ -99,7 +99,7 @@ const CartItems = (prop) => {
             </HStack>
 
                 {/* nut delete */}
-                <Pressable bg={Colors.red} w={WIDTH*0.19} onPress={handleRemove} >
+                <Pressable bg={Colors.red} w={WIDTH*0.19} onPress={()=>handleRemove(item.idUser, item.product.idProduct)} >
                   <Flex alignSelf="center" >
                       <Center  flex={1}>
                         <Ionicons name="trash" size={34} color="white" /> 
