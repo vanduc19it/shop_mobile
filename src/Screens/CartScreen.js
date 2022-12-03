@@ -61,7 +61,7 @@ const {cartItems} = cart;
                       color={Colors.white}  
                       rounded={0} ml={4} 
                       leftIcon={<MaterialCommunityIcons name="cart-variant" size={24} color="white" />}
-                      onPress={()=> navigation.navigate("Shipping")}
+                      onPress={()=> navigation.navigate("OrderProduct")}
                   >
                         Mua hàng 
                   </Button>

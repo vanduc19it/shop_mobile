@@ -9,6 +9,7 @@ import PlaceOrderScreen from '../Screens/PlaceOrderScreen'
 import Tabs from '../Components/Profile/Tabs'
 import EditProfile from '../Components/Profile/EditProfile'
 import ProfileScreen from '../Screens/ProfileScreen'
+import OrderProduct from '../Screens/OrderProduct'
 
 
 const Stack = createNativeStackNavigator()
@@ -29,6 +30,7 @@ export default function StackNav() {
          <Stack.Screen name="EditProfile" component={EditProfile} />
          <Stack.Screen name="Profile" component={ProfileScreen} />
          <Stack.Screen name="Payment" component={PaymentScreen} />
+         <Stack.Screen name="OrderProduct" component={OrderProduct} />
          
     </Stack.Navigator>
   )

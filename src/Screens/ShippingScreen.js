@@ -27,7 +27,7 @@ function ShippingScreen() {
     <Box flex={1} safeAreaTop bg="#66aff6" py={5}> 
       <Center pb={15}>
         <Text color="#fff" fontSize={14} bold>
-          DELIVERY ADDRESS
+          ĐỊA CHỈ GIAO HÀNG
         </Text>
       </Center>
       <Box h="full" bg="#fff" px={5}>
