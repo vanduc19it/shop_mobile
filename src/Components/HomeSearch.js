@@ -21,7 +21,7 @@ export default function HomeSearch() {
         space={3} 
         w="full" 
         px={6} 
-        bg={Colors.main} 
+        bg={Colors.bar} 
         py={4} 
         alignItems="center"
         safeAreaTop
@@ -40,8 +40,8 @@ export default function HomeSearch() {
             InputLeftElement={<Icon as={<EvilIcons name="search"  />} size={7} ml="2" color={Colors.black} />}
         />
         <Pressable ml={3} onPress={() => navigation.navigate("Cart")}>
-            <FontAwesome name="shopping-bag" size={24} color="black" />
-            <Box px={1} rounded="full" position="absolute" top={-13} left={2} bg="#ed1c5e" 
+            <FontAwesome name="shopping-bag" size={24} color={Colors.white} />
+            <Box px={1} rounded="full" position="absolute" top={-13} left={2} bg={Colors.red} 
             _text={{
                 color: "#fff",
                 fontSize:"11px" 

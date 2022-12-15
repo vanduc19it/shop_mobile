@@ -49,14 +49,14 @@ const CartItems = (prop) => {
                     <VStack>
                         <HStack space={2} mb={3} mt={3}>
                             <Image 
-                                source={{uri: "https://cdn.pixabay.com/photo/2022/11/20/21/18/africa-7605276_960_720.jpg"}} 
+                                source={{uri: "https://cdn.pixabay.com/photo/2020/11/06/05/33/woman-5716875__340.png"}} 
                                 alt="abc" 
                                 h={30}  w={30}
                                 resizeMode="stretch"
                                 rounded="full"
                             />
                             <Center>
-                                <Text>SHOPABC</Text>
+                                <Text>HelloYou</Text>
                             </Center>
                             <Center>
                                 <AntDesign name="right" size={14} color="#ccc" />

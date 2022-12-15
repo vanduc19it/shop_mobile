@@ -52,7 +52,7 @@ const {cartItems} = cart;
 
               <HStack  bg={Colors.white} borderColor={Colors.gray} borderWidth={1} shadow={1}>
                 <Center>
-                <Text bold italic fontSize={15} p={8}>Tổng tiền: <Text color={Colors.red}>1234500 đ</Text></Text>
+                <Text bold italic fontSize={15} pl={4} pt={8} pb={8} pr={8}>Tổng tiền: <Text color={Colors.red}>1234500 đ</Text></Text>
                 </Center>
                 
                 <Center>
@@ -63,7 +63,7 @@ const {cartItems} = cart;
                       leftIcon={<MaterialCommunityIcons name="cart-variant" size={24} color="white" />}
                       onPress={()=> navigation.navigate("OrderProduct")}
                   >
-                        Mua hàng 
+                        Thanh toán
                   </Button>
                 </Center>
               </HStack>
