@@ -52,8 +52,8 @@ function SingleProductScreen({route}) {
               maxValue={15} 
               minValue={0}
               borderColor="#ccc" rounded textColor="#000" iconStyle={{color: "#000"}}
-              rightButtonBackgroundColor="#66aff6"
-              leftButtonBackgroundColor="#66aff6" 
+              rightButtonBackgroundColor="#1a94ff"
+              leftButtonBackgroundColor="#1a94ff" 
               onChange={(e) => console.log(e)}
           />
           <Spacer/>
@@ -62,7 +62,7 @@ function SingleProductScreen({route}) {
           </HStack>
           <Text lineHeight={24} fontSize={12}>{product.description}
           </Text>
-          <Buttone bg="#66aff6" color="#fff" mt={10} onPress={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Buttone>
+          <Buttone bg="#1a94ff" color="#fff" mt={10} onPress={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Buttone>
           <Review product={product}/>
         </ScrollView>
     </Box>
