@@ -1,5 +1,5 @@
 import { Box, Heading, HStack, Image, ScrollView, Text, View, Spacer } from 'native-base'
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import Rating from '../Components/Rating'
 import NumericInput from "react-native-numeric-input"
 import Buttone from '../Components/Buttone'
@@ -7,7 +7,7 @@ import Review from '../Components/Review'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import {baseURL} from '../Url'
-import { addToCart } from '../Redux/Actions/CartActions'
+import { addToCart, getCart } from '../Redux/Actions/CartActions'
 
 function SingleProductScreen({route}) {
 
@@ -21,10 +21,14 @@ function SingleProductScreen({route}) {
   const [quantity, setQuantity] = useState(0)
 
 
+  const cart = useSelector((state)=> state.cart)
+  const {cartItems} = cart;
+
   // them sp vao gio hang 
   const handleAddToCart = () => {
-      navigation.navigate("Cart")
       dispatch(addToCart(userInfo.idUser, product, quantity))
+      dispatch(getCart(userInfo.idUser))
+      navigation.navigate("Cart", 1 )
   }
 
   return (
