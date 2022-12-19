@@ -212,7 +212,7 @@ function ProfileScreen() {
           <HStack >
           <Feather name="map-pin" size={22} color={Colors.red} />
             
-            <Text pl={2} fontSize={16} color="coolGray.800">
+            <Text pl={2} fontSize={16} color="coolGray.800" onPress={() => navigation.navigate("Shipping")}>
               Địa chỉ
             </Text>
             
@@ -281,7 +281,7 @@ function ProfileScreen() {
           <HStack >
           <Feather name="lock" size={22} color={Colors.blue} />
             
-            <Text pl={2} fontSize={16} color="coolGray.800">
+            <Text pl={2} fontSize={16} color="coolGray.800" onPress={()=> navigation.navigate("ResetPassword")}>
             Bảo mật tài khoản
             </Text>
             

@@ -1,17 +1,17 @@
 import { Box, Button, Center, HStack, ScrollView, Text, View } from 'native-base'
 import React, {useEffect} from 'react'
-import Buttone from '../Components/Buttone'
 import CartEmpty from '../Components/CartEmpty'
 import CartItems from '../Components/CartItems'
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getCart } from "../Redux/Actions/CartActions"
+import { getCart } from "../Redux/Actions/CartActions"
 import Colors from '../Colors'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-function CartScreen() {
+function CartScreen({route}) {
+  const value = route.params;
 
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ const {cartItems} = cart;
     <Box flex={1} safeAreaTop bg={Colors.main} >
       <HStack>
         <Center ml={4}>
-        <AntDesign name="leftcircleo" size={24} color={Colors.black} onPress={() => navigation.navigate("Home")} />
+        <AntDesign name="leftcircleo" size={24} color={Colors.white} onPress={() => navigation.navigate("Home")} />
         </Center>
      
           <Center w="full"  pt={4} pb={4} pr={10} >
@@ -45,7 +45,7 @@ const {cartItems} = cart;
       </HStack>
 
       {
-        cartItems.length ?
+        cartItems.length !== 0 || value > 0?
          (
           <>
              <CartItems cartItems={cartItems}/>

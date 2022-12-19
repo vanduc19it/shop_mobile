@@ -6,24 +6,20 @@ import Colors from '../Colors'
 
 const ShippingInputs = [
   {
-    label: "Tên người nhận", 
+    label: "Nhập mật khẩu cũ", 
     type: "text",
   },
   {
-    label: "Số điện thoại", 
+    label: "Nhập mật khẩu mới", 
     type: "text",
   },
   {
-    label: "Địa chỉ nhận hàng", 
+    label: "Nhập lại mật khẩu mới", 
     type: "text",
   },
-  {
-    label: "Tỉnh/ Thành phố", 
-    type: "text",
-  }
 ]
 
-function ShippingScreen() {
+function ResetPasswordScreen() {
   const navigation = useNavigation()
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" py={5}> 
@@ -34,7 +30,7 @@ function ShippingScreen() {
      
           <Center w="full"  pt={4} pb={4} pr={10} >
             <Text color={Colors.white} fontSize={18} bold >
-              Địa chỉ giao hàng
+              Đặt lại mật khẩu
             </Text>
           </Center>
       </HStack>
@@ -80,4 +76,4 @@ function ShippingScreen() {
   ) 
 }
 
-export default ShippingScreen
+export default ResetPasswordScreen

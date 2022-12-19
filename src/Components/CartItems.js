@@ -1,38 +1,42 @@
 import {  Dimensions } from 'react-native'
 import React from 'react'
-import { Text, Box, Button, Center, HStack, Image, Pressable, VStack,ScrollView, Flex, Checkbox, Divider } from 'native-base'
-import { SwipeListView } from 'react-native-swipe-list-view'
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Text, Box, Center, HStack, Image, Pressable, VStack,ScrollView, Flex, Checkbox, Divider } from 'native-base'
 import {baseURL} from '../Url'
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../Colors'
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import NumericInput from "react-native-numeric-input"
-import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../Redux/Actions/CartActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromCart, getCart } from '../Redux/Actions/CartActions';
 
 
-const CartItems = (prop) => {
-  const datta = prop.cartItems;
-  console.log(datta);
+
+const CartItems = () => {
+
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo} = userLogin;
   
   const navigation = useNavigation()
   // const [quantity, setQuantity] = useState(0)
   const WIDTH = Dimensions.get('window').width;
-
+  
   const handleRemove = (idUser, idProduct) => {
-    navigation.navigate("Home")
     dispatch(removeFromCart(idUser, idProduct))
-
+    dispatch(getCart(userInfo.idUser))
   }
+
+  const cart = useSelector((state)=> state.cart)
+  const {cartItems} = cart;
+
 
   return (
   <ScrollView w="full" bg={Colors.submain}  showsVerticalScrollIndicator={false}>
 
           {
-            datta.map((item, index) => (
+            cartItems.map((item, index) => (
               <ScrollView  showsVerticalScrollIndicator={false} horizontal  mt={2} key={index}>
               <HStack bg={Colors.white} w={WIDTH} >
 
