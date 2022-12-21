@@ -13,7 +13,6 @@ import CategoryScreen from '../Screens/CategoryScreen';
 import MessageScreen from '../Screens/MessageScreen';
 
 import { Entypo } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();

@@ -62,11 +62,15 @@ function ProfileScreen() {
       </HStack>
     </Flex>
         
-      <HStack>
+      <HStack >
+        <Pressable  onPress={() => navigation.navigate("EditProfile", userInfo)}>
         <Image source={{uri: `${baseURL}images/users/` + userInfo.avatar}} alt="profile"
           size="sm"
           resizeMode="cover"
+         
         />
+        </Pressable>
+       
       <VStack>
         <Heading
         bold 
@@ -76,6 +80,7 @@ function ProfileScreen() {
         color="#fff"
         ml={3}
         top={0}
+        onPress={() => navigation.navigate("EditProfile", userInfo)}
         >
           {userInfo.username}
         </Heading>
@@ -299,7 +304,7 @@ function ProfileScreen() {
       </Pressable>
 
       <Center mt={4}>
-        <Button variant="outline" _text={{color: Colors.black}} w="90%" >Đăng xuất</Button>
+        <Button variant="outline" _text={{color: Colors.black}} w="90%" onPress={()=> navigation.navigate("Login")}>Đăng xuất</Button>
       </Center>
       
     </Flex>
