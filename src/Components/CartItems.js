@@ -26,6 +26,8 @@ const CartItems = () => {
   const handleRemove = (idUser, idProduct) => {
     dispatch(removeFromCart(idUser, idProduct))
     dispatch(getCart(userInfo.idUser))
+    navigation.navigate("Cart")
+    
   }
 
   const cart = useSelector((state)=> state.cart)

@@ -11,7 +11,7 @@ import EditProfile from '../Components/Profile/EditProfile'
 import ProfileScreen from '../Screens/ProfileScreen'
 import OrderProduct from '../Screens/OrderProduct'
 import ResetPasswordScreen from '../Screens/ResetPasswordScreen'
-
+import LoginScreen from '../Screens/LoginScreen'
 
 const Stack = createNativeStackNavigator()
 export default function StackNav() {
@@ -33,6 +33,7 @@ export default function StackNav() {
          <Stack.Screen name="Payment" component={PaymentScreen} />
          <Stack.Screen name="OrderProduct" component={OrderProduct} />
          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+         <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   )
 }

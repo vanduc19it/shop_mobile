@@ -10,7 +10,8 @@ const Colors = {
     submain: "#fffced",
     green: "#03c126",
     bar: "#1a94ff",
-    darkgray: "#aaa"
+    darkgray: "#aaa",
+    blue2: "#cffcfc"
     
     
 }
