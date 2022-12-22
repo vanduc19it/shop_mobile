@@ -1,5 +1,5 @@
 import { HStack, Input, Pressable, Text, Box, Icon } from 'native-base'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../Colors'
@@ -9,13 +9,10 @@ import { getCart } from '../Redux/Actions/CartActions';
 
 export default function HomeSearch() {
     const navigation = useNavigation()
- 
-  
-  
+    
   const cart = useSelector((state)=> state.cart)
   const {cartItems} = cart;
 
-  console.log(cartItems)
   return (
     <HStack 
         space={3} 
@@ -27,6 +24,7 @@ export default function HomeSearch() {
         safeAreaTop
     >
         <Input placeholder="Tìm kiếm sản phẩm"
+            rounded={30}
             w="85%"
             bg={Colors.white}
             type="search"
@@ -38,6 +36,7 @@ export default function HomeSearch() {
                 bg: Colors.white
             }}
             InputLeftElement={<Icon as={<EvilIcons name="search"  />} size={7} ml="2" color={Colors.black} />}
+            onFocus={()=> navigation.navigate("Search")}
         />
         <Pressable ml={3} onPress={() => navigation.navigate("Cart")}>
             <FontAwesome name="shopping-bag" size={24} color={Colors.white} />

@@ -24,13 +24,12 @@ export const listProduct = () => async (dispatch) => {
 };
 
 //products search
-export const searchProduct = (keyword="") => async (dispatch) => {
+export const searchProduct = (keyword) => async (dispatch) => {
     
     try {
         dispatch({type: PRODUCT_SEARCH_REQUEST});
-        const {data} = await axios.get( `${baseURL}product-search/?search=${keyword}`)
+        const {data} = await axios.get( `${baseURL}all-product/1/?search=${keyword}`)
         dispatch({type:PRODUCT_SEARCH_SUCCESS, payload:data})
-        console.log(data)
     } catch (error) {
         dispatch({ 
             type: PRODUCT_SEARCH_FAIL,

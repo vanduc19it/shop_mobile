@@ -44,13 +44,13 @@ export const productDetailReducer = (state = { product: {reviews: []}}, action) 
     }
 }
 //PRODUCT SEARCH
-export const productSearchReducer = (state = { products: []}, action) => {
+export const productSearchReducer = (state = { productsearch: []}, action) => {
     switch (action.type) {
         case PRODUCT_SEARCH_REQUEST: 
-            return {loading: true, products:[]}
+            return {loading: true, productsearch:[]}
 
         case PRODUCT_SEARCH_SUCCESS: 
-            return {loading: false, productsSearch: action.payload}
+            return {loading: false, productsearch: action.payload}
 
         case PRODUCT_SEARCH_FAIL: 
             return {loading: false, error: action.payload}
