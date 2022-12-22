@@ -29,6 +29,7 @@ useEffect(()=> {
 const cart = useSelector((state)=> state.cart)
 const {cartItems} = cart;
 
+const totalPrice = cartItems.reduce((total, curr) => total + curr.product.quantity * curr.product.unit_price, 0)
 
   return (
     <Box flex={1} safeAreaTop bg={Colors.main} >
@@ -52,7 +53,7 @@ const {cartItems} = cart;
 
               <HStack  bg={Colors.white} borderColor={Colors.gray} borderWidth={1} shadow={1}>
                 <Center>
-                <Text bold italic fontSize={15} pl={4} pt={8} pb={8} pr={8}>Tổng tiền: <Text color={Colors.red}>1234500 đ</Text></Text>
+                <Text bold italic fontSize={15} pl={4} pt={8} pb={8} pr={8}>Tổng tiền: <Text color={Colors.red}>{totalPrice} đ</Text></Text>
                 </Center>
                 
                 <Center>

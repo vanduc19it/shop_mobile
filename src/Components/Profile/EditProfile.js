@@ -31,12 +31,8 @@ const [gender, setGender] = useState("");
     if(name != "" && email != "" && address != "" && gender != ""){
       setIsOpen(true)
     }
-    
   }
   const [isOpen, setIsOpen] = useState(false);
-
- 
-
   const cancelRef = useRef(null);
 
   const onClose = () => {setIsOpen(false);}

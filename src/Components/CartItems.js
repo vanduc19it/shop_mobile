@@ -32,8 +32,9 @@ const CartItems = () => {
 
   const cart = useSelector((state)=> state.cart)
   const {cartItems} = cart;
+ 
 
-
+  
   return (
   <ScrollView w="full" bg={Colors.submain}  showsVerticalScrollIndicator={false}>
 
@@ -81,13 +82,13 @@ const CartItems = () => {
                               <Text w="80%" bold>{item.product.nameProduct}</Text>
 
                               <NumericInput
-              
+                                  value={item.product.quantity}
                                   totalwidth={120} 
                                   totalHeight={30} 
                                   iconSize={25} 
                                   step={1} 
                                   maxValue={15} 
-                                  minValue={0}
+                                  minValue={1}
                                   borderColor={Colors.gray} 
                                   rounded 
                                   textColor="#000" 

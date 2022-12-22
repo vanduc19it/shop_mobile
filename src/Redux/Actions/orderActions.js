@@ -25,32 +25,31 @@ export const createOrder = (order) => async (dispatch, getState) => {
                 {
                 idUser: userInfo.idUser,
                 namedReceiver: userInfo.username,  
-                addressReceiver: order.shippingInfo.address, 
-                phoneReceiver: order.shippingInfo.phone,  
+                addressReceiver: order.shippingInfo, 
+                phoneReceiver: "0354941620",  
                 payment: order.paymentMethod,             
                 totalPrice: order.totalPrice,
-                message: order.shippingInfo.message
+                message: "test"
                 }, 
         }; 
 
         order.orderItems.map((item) => {
               dataa.cartItems.push(
                 {
-                    idProduct: item.product, 
-                    nameProduct: item.name,
-                    imgProduct: item.image,
+                    idProduct: item.idProduct, 
+                    nameProduct: item.nameProduct,
+                    imgProduct: item.imgProduct,
                     quantity: item.quantity,
-                    unit_price: item.price,
+                    unit_price: item.unit_price,
                   }
               )        
         })
 
+        console.log(dataa);
         const {data} = await axios.post(`${baseURL}order/create-new`, dataa, config);
-
+        
         dispatch({type:ORDER_CREATE_SUCCESS, payload:data})
         dispatch({type: CART_CLEAR_PRODUCTS, payload:data})
-
-        await AsyncStorage.removeItem("cartItems")
         
     } catch (error) {
         const message = error.response && error.response.data.message
