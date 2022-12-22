@@ -78,7 +78,8 @@ export default function CategoryScreen() {
                       margin={1}
                       bg={Colors.white} 
                       shadow={1} 
-                      ml={3}>
+                      ml={3}
+                      key={item._id}>
                     <Center>
                     <Image 
                                 source={{uri: `${baseURL}images/products/${item.imageProduct}`}} 

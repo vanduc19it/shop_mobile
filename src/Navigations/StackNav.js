@@ -12,7 +12,7 @@ import ProfileScreen from '../Screens/ProfileScreen'
 import OrderProduct from '../Screens/OrderProduct'
 import ResetPasswordScreen from '../Screens/ResetPasswordScreen'
 import LoginScreen from '../Screens/LoginScreen'
-
+import SearchScreen from '../Screens/SearchScreen'
 const Stack = createNativeStackNavigator()
 export default function StackNav() {
   return (
@@ -34,6 +34,7 @@ export default function StackNav() {
          <Stack.Screen name="OrderProduct" component={OrderProduct} />
          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
          <Stack.Screen name="Login" component={LoginScreen} />
+         <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   )
 }

@@ -18,7 +18,7 @@ function HomeProducts() {
 
     
     const productList = useSelector((state)=> state.productList);
-    const {loading, error, products} = productList;
+    const {products} = productList;
   
 
     useEffect(()=> {
