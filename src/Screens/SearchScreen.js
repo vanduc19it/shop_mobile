@@ -1,13 +1,11 @@
-import { Box, Flex, Heading, Image, Pressable, ScrollView, Text, HStack, Input, Icon, Button, Center } from 'native-base'
-import React, {  useEffect, useState } from 'react'
+import { Box, Flex, Heading, Image, Pressable, ScrollView, Text, HStack, Input, Button, Center } from 'native-base'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-// import Rating from './Rating'
-import { listProduct, searchProduct} from "../Redux/Actions/ProductActions";
+import Rating from '../Components/Rating'
+import {searchProduct} from "../Redux/Actions/ProductActions";
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../Colors';
 import {baseURL} from '../Url'
-import { EvilIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 function SearchScreen() {
 
@@ -98,7 +96,7 @@ function SearchScreen() {
                                  {product.price} VND
                              </Heading>
                              <Text fontSize={10} mt={1} isTruncated w="full">{product.name}</Text>
-                             {/* <Rating value={product.rating}/> */}
+                             <Rating value={product.rating}/>
                          </Box>
                      </Pressable>
                      
