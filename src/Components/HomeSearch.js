@@ -46,7 +46,7 @@ export default function HomeSearch() {
                 fontSize:"11px" 
                  }}
             >
-                {/* {cartItems.length}    */}5
+                {cartItems.length}   
             </Box>
         </Pressable>
     </HStack>

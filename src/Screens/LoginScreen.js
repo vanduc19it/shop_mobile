@@ -1,9 +1,8 @@
-import { Box, Button, Heading, Image, Input, Pressable, Text, Icon, VStack, Center, Flex ,HStack} from 'native-base'
+import { Box, Button, Heading, Image, Input, Pressable, Text, Icon, FormControl, VStack, Center, Flex ,HStack, useToast} from 'native-base'
 import React, {useState} from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetail, login } from '../Redux/Actions/userActions';
-import Buttone from '../Components/Buttone'
 import Colors from '../Colors'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -17,21 +16,56 @@ const [email, setEmail] = useState("")
 const [password, setPassword] = useState("") 
 
 const userLogin = useSelector((state) => state.userLogin);
-const {userInfo} = userLogin;
+const {userInfo, error} = userLogin;
 
 const handleLogin = () => {
+  if(email === "" ) {
+    setValidateEmail(true) 
+  }
+  if( password === "") {
+    setValidatePassword(true)
+  }
+
   dispatch(login(email, password))
-  navigation.navigate("Bottom")
+ 
+  if(error || email === "" || password === "") {
+    //dang nhap nhat bai
+    toast.show({
+      render: () => {
+        return <Box bg="emerald.500" px="2" py="2" rounded="sm" mb={5}>
+                Đăng nhập thất bại!
+              </Box>;
+      },
+      duration: 1000,
+    })
+    
+  } else {
+    navigation.navigate("Bottom")
+    //toast dang nhap thanh cong
+    toast.show({
+      render: () => {
+        return <Box bg="emerald.500" px="2" py="2" rounded="sm" mb={5}>
+                Đăng nhập thành công!
+              </Box>;
+      },
+      duration: 1000,
+    })
+    
+  }
+  
   
 }
+const toast = useToast()
 
+const [validateEmail, setValidateEmail] = useState(false)
+const [validatePassword, setValidatePassword] = useState(false)
 
 const [show, setShow] = React.useState(false);
   return (
    <Box flex={1} bg={Colors.white}>
       <Box 
         w="full"
-        h="95%"
+        h="100%"
         position="absolute"
         top="0"
         px="6"
@@ -48,7 +82,7 @@ const [show, setShow] = React.useState(false);
           w="full"
           source={require('../../assets/giflogin.gif')}
         />
-        
+        <FormControl isRequired>
         <VStack space={4} pt="10" pb={5}>
           <Input
             InputLeftElement={
@@ -62,7 +96,7 @@ const [show, setShow] = React.useState(false);
             }
                 
             variant="underlined" 
-            placeholder='user@gmail.com' 
+            placeholder='Nhập email của bạn' 
             w="100%" 
             p={4}
             color={Colors.black}
@@ -74,6 +108,11 @@ const [show, setShow] = React.useState(false);
             bg={Colors.blue2}
             borderBottomColor={Colors.white}
           />
+           {
+           validateEmail ? <FormControl.HelperText>
+           Nhập email của bạn
+           </FormControl.HelperText> : ''
+         }
           {/* input password */}
           <Input
             InputLeftElement={
@@ -110,27 +149,34 @@ const [show, setShow] = React.useState(false);
             onChangeText={(e) => setPassword(e)}
             
           />
+          {
+           validatePassword ? <FormControl.HelperText>
+           Nhập password của bạn
+           </FormControl.HelperText> : ''
+         }
+        
           <Flex alignItems="flex-end" mr="1">
              <Text italic color={Colors.orange}>Forgot Password</Text>
           </Flex>
          
         </VStack> 
-        <Buttone
-          _pressed={{
+        </FormControl>
+        <Button
+           _pressed={{
             bg: "#1cef58"
           }}
           _text={{
-            color: "#fff"
+            color: Colors.white,
+            fontWeight: "bold"
           }}
-          my={30} 
-          w="40" 
+          w="100%" 
           rounded={50} 
+          p={4}
           bg={Colors.main}
           onPress={handleLogin}
-          color={Colors.white}
         >
           LOGIN
-        </Buttone>
+        </Button>
         <Center >
           <Text color={Colors.lightblue} italic mt={2}>__________ OR ___________</Text>
         </Center>

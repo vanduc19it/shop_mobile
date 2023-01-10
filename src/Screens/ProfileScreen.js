@@ -1,14 +1,11 @@
-import { Badge, Box, Center, Divider, Flex, Heading, HStack, Image, Pressable, Text, View, VStack, ScrollView, Button } from 'native-base'
+import { Badge, Box, Center, Divider, Flex, Heading, HStack, Image, Pressable, Text, VStack, ScrollView, Button } from 'native-base'
 import React, { useEffect } from 'react'
-import Tabs from '../Components/Profile/Tabs'
 import { useDispatch, useSelector } from "react-redux";
 import {baseURL} from '../Url'
 import moment from "moment";
 import Colors from '../Colors'
 import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
@@ -235,7 +232,7 @@ function ProfileScreen() {
           <HStack >
           <MaterialIcons name="payment" size={22} color={Colors.green} />
             
-            <Text pl={2} fontSize={16} color="coolGray.800">
+            <Text pl={2} fontSize={16} color="coolGray.800" onPress={()=> navigation.navigate("Payment")}>
               Phương thức thanh toán
             </Text>
             

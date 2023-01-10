@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Image, ScrollView, Text, View, Spacer } from 'native-base'
+import { Box, Heading, HStack, Image, ScrollView, Text, Divider, Spacer } from 'native-base'
 import React, {useState} from 'react'
 import Rating from '../Components/Rating'
 import NumericInput from "react-native-numeric-input"
@@ -67,8 +67,10 @@ function SingleProductScreen({route}) {
           <Heading bold color="#000" fontSize={15}>Giá: <Text color={Colors.red}>{product.price} đ</Text> </Heading>
 
           </HStack>
-          <Text lineHeight={24} fontSize={12} >{product.description}
-          </Text>
+          <Text lineHeight={24} fontSize={14} bold>Thông tin mô tả</Text>
+          <Divider mt={3} mb={3} bg="coolGray.100"/>
+          <Text lineHeight={24} fontSize={12} >{product.description}</Text>
+          <Divider mt={3} bg="coolGray.100"/>
           <Buttone bg={Colors.blue} color="#fff" mt={10} onPress={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Buttone>
           <Review product={product}/>
         </ScrollView>

@@ -3,8 +3,9 @@ import { Box, Center, Flex, HStack, Image, Pressable, ScrollView, Text } from 'n
 import axios from "axios"
 import {baseURL} from '../Url'
 import Colors from '../Colors'
+import { useNavigation } from '@react-navigation/native'
 export default function Category() {
-
+    const navigation = useNavigation()
     const [category, setCategory] = useState([]);
 
       useEffect(()=> {
@@ -25,7 +26,16 @@ export default function Category() {
             px={4}>
                 {
                     category.map((item)=> (
-                        <Pressable w="20" h="20" bg={Colors.white} mr={6} rounded={20} key={item._id} borderColor={Colors.gray} borderWidth="1" >
+                        <Pressable 
+                            w="20" h="20" 
+                            bg={Colors.white} 
+                            mr={6} 
+                            rounded={20} 
+                            key={item._id} 
+                            borderColor={Colors.gray} 
+                            borderWidth="1" 
+                            onPress={()=> navigation.navigate("Category")}
+                        >
                             <Image 
                                 source={{uri: `${baseURL}images/categories/${item.imageCategory}`}} 
                                 alt={item.nameCategory} 

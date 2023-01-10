@@ -22,10 +22,10 @@ export default function EditProfile() {
   const userDetail = useSelector((state) => state.userDetail);
   const {user} = userDetail;
     
-const [name, setName] = useState("");
-const [email, setEmail] = useState("");
-const [address, setAddress] = useState("");
-const [gender, setGender] = useState("");
+const [name, setName] = useState(user.result.username);
+const [email, setEmail] = useState(user.result.email);
+const [address, setAddress] = useState(`${user.result.address}`);
+const [gender, setGender] = useState(user.result.gender);
   
   const handleOpenAlert = () => {
     if(name != "" && email != "" && address != "" && gender != ""){

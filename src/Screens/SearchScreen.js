@@ -20,7 +20,7 @@ function SearchScreen() {
 
     const productSearch = useSelector((state)=> state.productSearch);
     const {productsearch} = productSearch;
-
+    console.log(productsearch.length)
     
 
     
@@ -57,7 +57,10 @@ function SearchScreen() {
         />
         <Button rounded={40} bg={Colors.red} bold onPress={handleSearch}>Tìm kiếm</Button>
         </HStack>
+
         {/* show product search */}
+        <Text ml={6} my={2} bold fontSize={18}>Sản phẩm tìm kiếm</Text>
+       
          <ScrollView flex={1} showsVerticalScrollIndicator={false}>
          
          <Flex 
@@ -66,42 +69,46 @@ function SearchScreen() {
              justifyContent="space-between"
              px={6}
          >
-             {
-                 productsearch.map((product) =>(
-                     <Pressable 
-                         key={product._id} 
-                         w="47%"
-                         bg="#fff"
-                         rounded="md"
-                         shadow={2}
-                         pt={0.3}
-                         my={3}
-                         pb={2}
-                         overflow="hidden"
-                         onPress={() => navigation.navigate("SingleProductScreen", product)}
- 
-                     >
-                         <Image
-                             source={{uri: `${baseURL}images/products/` + product.imageProduct}}
-                             alt={product.nameProduct}
-                             w="full"
-                             h={24}
-                             resizeMode="contain"
-                         />
-                         <Box px={4} pt={1}>
-                             <Heading size="xs" bold>
-                                 {product.nameProduct} 
-                             </Heading>
-                             <Heading size="sm" bold>
-                                 {product.price} VND
-                             </Heading>
-                             <Text fontSize={10} mt={1} isTruncated w="full">{product.name}</Text>
-                             <Rating value={product.rating}/>
-                         </Box>
-                     </Pressable>
-                     
-                 ))
-             }
+              { productSearch.length == 0 ? (<Text>Không tìm thấy sản phẩm, bạn vui lòng thử lại!</Text>) :
+                productsearch.map((product) =>(
+                    <Pressable 
+                        key={product._id} 
+                        w="47%"
+                        bg="#fff"
+                        rounded="md"
+                        shadow={1}
+                        pt={0.3}
+                        my={2}
+                        pb={2}
+                        overflow="hidden"
+                        onPress={() => navigation.navigate("SingleProductScreen", product)}
+
+                    >
+                        <Image
+                            source={{uri: `${baseURL}images/products/` + product.imageProduct}}
+                            alt={product.nameProduct}
+                            w="full"
+                            h="140"
+                            resizeMode="stretch"
+                        />
+                        <Box px={1}>
+                            <Text textAlign="center" bold  mt={1}>
+                                {product.nameProduct} 
+                            </Text>
+                            <Heading size="xs" bold color={Colors.red} pl={2} pt={2}>
+                                Giá: {product.price} đ
+                            </Heading>
+                            <Text fontSize={10} w="full">{product.name}</Text>
+                            <Box ml={2}>
+                            <Rating value={product.rating}/>
+                            </Box>
+                            
+                        </Box>
+                    </Pressable>
+                    
+                ))
+            
+            }
          </Flex>
         </ScrollView>
     </Box>

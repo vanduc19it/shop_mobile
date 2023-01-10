@@ -31,7 +31,7 @@ const CartItems = () => {
     
   }
 
-  useEffect(()=> {
+useEffect(()=> {
     dispatch(getShopDetail(userInfo.idUser))
 },[dispatch, userInfo.idUser])
 

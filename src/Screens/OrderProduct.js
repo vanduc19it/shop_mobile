@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { Box, Button, Center, Checkbox, Divider, Flex, FormControl, HStack, Image, Input, ScrollView, Text, VStack,useToast, AlertDialog} from 'native-base'
-import React, { useRef, useState } from 'react'
-import Buttone from '../Components/Buttone'
+import React, { useEffect, useRef, useState } from 'react'
 import Colors from '../Colors'
 import { EvilIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -9,6 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import {baseURL} from '../Url'
 import { createOrder } from '../Redux/Actions/orderActions'
+import { getShopDetail } from '../Redux/Actions/shopActions';
 
 function OrderProduct() {
   const navigation = useNavigation()
@@ -41,7 +41,7 @@ function OrderProduct() {
     dispatch( 
       createOrder({
         orderItems: cartItems,
-        shippingInfo: "abc",
+        shippingInfo: "Trường ĐH CNTT & TT Việt Hàn, 470 Trần Đại Nghĩa, Đà Nẵng, Việt Nam",
         paymentMethod: "shipcod",
         itemsPrice: itemsPrice,
         shippingPrice: shippingPrice,
@@ -56,12 +56,25 @@ function OrderProduct() {
       },
       duration: 2000,
     })
+    navigation.navigate("Home")
   }
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo} = userLogin;
+
+  useEffect(()=> {
+    dispatch(getShopDetail(userInfo.idUser))
+  },[dispatch, userInfo.idUser])
+
+
+  const shopDetail = useSelector((state)=> state.shopDetail)
+  const {shopInfo} = shopDetail;
+  console.log(shopInfo)
   return (
     <Box flex={1} safeAreaTop bg={Colors.main} py={5}> 
        <HStack>
         <Center ml={4} mb={4}>
-          <AntDesign name="leftcircleo" size={24} color={Colors.black} onPress={() => navigation.navigate("Cart")} />
+          <AntDesign name="leftcircleo" size={24} color={Colors.white} onPress={() => navigation.navigate("Cart")} />
         </Center>
      
           <Center w="full"   pb={4} pr={10} >
@@ -88,11 +101,8 @@ function OrderProduct() {
               <HStack space={2} >
                 <Text bold fontSize="15px">Văn Đức</Text>
                 <Text bold fontSize="15px">(+84) 0354941620</Text>            
-                <Center>      
-                      <AntDesign name="right" size={14} color="#ccc" />
-                </Center>   
               </HStack>
-              <Text color={Colors.darkgray} fontSize="14px" mb={4}>Trường Đại học cntt và tt Viet Han Da Nag, 470 tran dai nghia, Viet Nam</Text>
+              <Text color={Colors.darkgray} fontSize="14px" mb={4}>Trường ĐH CNTT & TT Việt Hàn, 470 Trần Đại Nghĩa, Đà Nẵng, Việt Nam</Text>
             </VStack>
           </HStack>
           {/* item */} 
@@ -102,14 +112,14 @@ function OrderProduct() {
               <VStack>
                   <HStack space={2} mb={3} mt={3}>
                       <Image 
-                          source={{uri: "https://cdn.pixabay.com/photo/2020/11/06/05/33/woman-5716875__340.png"}} 
+                          source={{uri: shopInfo.imgShop ? `${baseURL}images/shops/`+ shopInfo.imgShop : "https://tse3.mm.bing.net/th?id=OIP.-iHHGNEt70z4UO6e_TdcfQHaIs&pid=Api" }} 
                           alt="abc" 
                           h={30}  w={30}
                           resizeMode="stretch"
                           rounded="full"
                       />
                       <Center>
-                          <Text bold>HelloYou Shop</Text>
+                          <Text bold>{shopInfo.nameShop}</Text>
                       </Center>
                     
                   </HStack>
@@ -123,10 +133,10 @@ function OrderProduct() {
                           onPress={() => navigation.navigate("SingleProductScreen")}
                       />
                       <VStack space={2} w="64%"> 
-                        <Text mt={1}>{item.product.nameProduct}</Text>
+                        <Text mt={1} bold>{item.product.nameProduct}</Text>
 
                       
-                        <Text bold mt={2}>{item.product.unit_price} đ</Text>
+                        <Text bold mt={2}>Giá: <Text color={Colors.red}>{item.product.unit_price} đ</Text></Text>
                         <Flex alignItems="flex-end" w="full">
                         <Text >x {item.product.quantity}</Text>
                         </Flex>
@@ -135,19 +145,24 @@ function OrderProduct() {
                   </HStack>
                   <HStack>
                       <Box w="80%"  mt={5}>
-                          <Text   color={Colors.darkgray}>Tin nhắn cho người bán </Text>
+                          <Input borderWidth={0} fontSize={14}  
+                          _focus={{
+                            bg: Colors.white,
+                            borderColor: Colors.white,
+                       
+                            }} placeholder="Tin nhắn cho người bán" color={Colors.darkgray}/>
                       </Box>
                       <Box w="20%" mt={5}>
                         <HStack>
-                            <Text >Chat ngay </Text>
-                            <Box mt={1}><AntDesign name="right" size={14} color="#ccc" /> </Box>
+                            <Text mt={3}>Chat ngay </Text>
+                            <Box mt={5}><AntDesign name="right" size={8} color="#ccc" /> </Box>
                         </HStack>        
                           
                       </Box>
                   </HStack>
                   <Divider bg="emerald.500" thickness="1"/>
                   <Flex alignItems="flex-end" pt={2} pb={2}>
-                      <Text >1 mặt hàng, tổng cộng <Text bold>{item.product.quantity * item.product.unit_price} đ</Text> </Text>
+                      <Text >{item.product.quantity} mặt hàng, tổng cộng: <Text bold color= {Colors.red}>{item.product.quantity * item.product.unit_price} đ</Text> </Text>
                   </Flex>
               </VStack>
           </Box>
@@ -158,11 +173,11 @@ function OrderProduct() {
           <VStack w="full" mb={2}  bg={Colors.white} pb={4}>
           <HStack>
               <Box w="70%"  mt={2} ml={2}>
-                <Text ml={2}  color={Colors.darkgray}>Phương thức thanh toán </Text>
+                <Text ml={2} bold color={Colors.black}>Phương thức thanh toán </Text>
               </Box>
               <Box w="30%" mt={2}>
                 <HStack>
-                    <Text >Xem tất cả </Text>
+                    <Text color={Colors.darkgray}>Xem tất cả </Text>
                     <Box  mt={1}><AntDesign name="right" size={14} color="#ccc" /> </Box>
                 </HStack>        
                    
