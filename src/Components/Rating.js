@@ -2,11 +2,11 @@ import { HStack, Text } from 'native-base'
 import React from 'react'
 import { FontAwesome } from '@expo/vector-icons'; 
 import Colors from '../Colors'
-function Rating({value, text}) {
-    const size = 8
-    const color= "#000"
+function Rating({value=4, text}) {
+    const size = 14
+    const color= Colors.orange
   return (
-    <HStack space={0.4} mt={1} alignItems="center">
+    <HStack space={1} alignItems="center">
         <FontAwesome 
             bg={Colors.orange}
             name={value >= 1 ? "star" : value >= 0.5 ? "star-half-o" : "star-o"} 

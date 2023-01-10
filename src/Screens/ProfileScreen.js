@@ -31,6 +31,7 @@ function ProfileScreen() {
     dispatch(getUserDetail(userInfo.idUser));
   },[dispatch, userInfo.idUser]);
 
+  
 
 
   return (
@@ -181,7 +182,7 @@ function ProfileScreen() {
              <Entypo name="shop" size={22} color={Colors.green} />
             
             
-            <Text pl={2} fontSize={16} color="coolGray.800">
+            <Text pl={2} fontSize={16} color="coolGray.800" onPress={() => navigation.navigate("Shop", userInfo)}>
               Quản lý shop
             </Text>
             

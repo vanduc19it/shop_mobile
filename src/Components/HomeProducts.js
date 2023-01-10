@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Pressable, ScrollView, Text } from 'native-base'
+import { Box, Divider, Flex, Heading, Image, Pressable, ScrollView, Text } from 'native-base'
 import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import Rating from './Rating'
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import {baseURL} from '../Url'
 import Slider from './Slider';
 import Category from './Category';
+import Colors from '../Colors';
 
 function HomeProducts() {
 
@@ -30,12 +31,15 @@ function HomeProducts() {
     <ScrollView flex={1} showsVerticalScrollIndicator={false}>
           <Slider/>
         <Category/>
+       
         <Flex 
             flexWrap="wrap" 
             direction="row" 
             justifyContent="space-between"
-            px={6}
+            px={4}
         >
+             <Text fontSize={16} bold>Danh sách sản phẩm</Text>
+             <Divider bg={Colors.gray}/>
             {
                 products.map((product) =>(
                     <Pressable 
@@ -43,9 +47,9 @@ function HomeProducts() {
                         w="47%"
                         bg="#fff"
                         rounded="md"
-                        shadow={2}
+                        shadow={1}
                         pt={0.3}
-                        my={3}
+                        my={2}
                         pb={2}
                         overflow="hidden"
                         onPress={() => navigation.navigate("SingleProductScreen", product)}
@@ -55,18 +59,21 @@ function HomeProducts() {
                             source={{uri: `${baseURL}images/products/` + product.imageProduct}}
                             alt={product.nameProduct}
                             w="full"
-                            h={24}
-                            resizeMode="contain"
+                            h="140"
+                            resizeMode="stretch"
                         />
-                        <Box px={4} pt={1}>
-                            <Heading size="xs" bold>
+                        <Box px={1}>
+                            <Text textAlign="center" bold  mt={1}>
                                 {product.nameProduct} 
+                            </Text>
+                            <Heading size="xs" bold color={Colors.red} pl={2} pt={2}>
+                                Giá: {product.price} đ
                             </Heading>
-                            <Heading size="sm" bold>
-                                {product.price} VND
-                            </Heading>
-                            <Text fontSize={10} mt={1} isTruncated w="full">{product.name}</Text>
+                            <Text fontSize={10} w="full">{product.name}</Text>
+                            <Box ml={2}>
                             <Rating value={product.rating}/>
+                            </Box>
+                            
                         </Box>
                     </Pressable>
                     

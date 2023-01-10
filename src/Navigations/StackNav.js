@@ -13,6 +13,7 @@ import OrderProduct from '../Screens/OrderProduct'
 import ResetPasswordScreen from '../Screens/ResetPasswordScreen'
 import LoginScreen from '../Screens/LoginScreen'
 import SearchScreen from '../Screens/SearchScreen'
+import ShopScreen from '../Screens/ShopScreen'
 const Stack = createNativeStackNavigator()
 export default function StackNav() {
   return (
@@ -35,6 +36,7 @@ export default function StackNav() {
          <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
          <Stack.Screen name="Login" component={LoginScreen} />
          <Stack.Screen name="Search" component={SearchScreen} />
+         <Stack.Screen name="Shop" component={ShopScreen} />
     </Stack.Navigator>
   )
 }

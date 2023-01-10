@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
 import {baseURL} from '../Url'
 import { addToCart, getCart } from '../Redux/Actions/CartActions'
+import Colors from '../Colors'
 
 function SingleProductScreen({route}) {
 
@@ -30,6 +31,8 @@ function SingleProductScreen({route}) {
       dispatch(getCart(userInfo.idUser))
       navigation.navigate("Cart", 1 )
   }
+ 
+
 
   return (
     <Box safeArea flex={1} bg="#fff"> 
@@ -42,31 +45,31 @@ function SingleProductScreen({route}) {
             resizeMode="contain"
             mt ={2}
           />
-          <Heading bold fontSize={15} mb={2} lineHeight={22}>
+          <Heading bold fontSize={15} mb={2} lineHeight={22} mt={2}>
               {product.nameProduct} 
           </Heading>
           <Rating value={4}/>
           <HStack space={2} alignItems="center" my={5}>
             <NumericInput
-              
+              borderColor={Colors.white}
               totalwidth={140} 
               totalHeight={30} 
               iconSize={25} 
               step={1} 
               maxValue={15} 
               minValue={0}
-              borderColor="#ccc" rounded textColor="#000" iconStyle={{color: "#000"}}
-              rightButtonBackgroundColor="#1a94ff"
-              leftButtonBackgroundColor="#1a94ff" 
+              rounded textColor={Colors.black} iconStyle={{color: Colors.white}}
+              rightButtonBackgroundColor={Colors.red}
+              leftButtonBackgroundColor={Colors.blue}
               onChange={(e) => console.log(e)}
           />
           <Spacer/>
-          <Heading bold color="#000" fontSize={19}>{product.price} vnd</Heading>
+          <Heading bold color="#000" fontSize={15}>Giá: <Text color={Colors.red}>{product.price} đ</Text> </Heading>
 
           </HStack>
-          <Text lineHeight={24} fontSize={12}>{product.description}
+          <Text lineHeight={24} fontSize={12} >{product.description}
           </Text>
-          <Buttone bg="#1a94ff" color="#fff" mt={10} onPress={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Buttone>
+          <Buttone bg={Colors.blue} color="#fff" mt={10} onPress={handleAddToCart}>THÊM VÀO GIỎ HÀNG</Buttone>
           <Review product={product}/>
         </ScrollView>
     </Box>
