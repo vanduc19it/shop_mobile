@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, useToast, Image, Flex ,Text} from 'native-base'
+import { Box, FormControl, Heading, TextArea, VStack, ScrollView, useToast, Image, Flex ,Text} from 'native-base'
 import Ratingg from './Rating'
 import Message from './Notifications/Message'
 import Buttone from '../Components/Buttone'
@@ -11,25 +11,26 @@ import Colors from '../Colors'
 import {baseURL} from '../Url'
 import { AirbnbRating } from 'react-native-ratings';
 import { createProductFeedback } from '../Redux/Actions/ProductActions'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Review({product}) {
   const dispatch = useDispatch();
+
+  const navigation = useNavigation()
 
   const userLogin = useSelector((state)=> state.userLogin)
   const {userInfo} = userLogin;
 
   const productGetFeedback = useSelector((state)=> state.productGetFeedback)
   const {feedbacks} = productGetFeedback;
+
   
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState("")
 
 
   //dispatch get comment
-  useEffect(()=> {
-    dispatch(getProductFeedback(product._id))
-
-  },[dispatch,product._id])
+ 
 
   const toast = useToast()
   //danh gia san phan
@@ -48,6 +49,10 @@ export default function Review({product}) {
     }
    
     }
+    useEffect(()=> {
+      dispatch(getProductFeedback(product._id))
+  
+    },[dispatch,product._id])
   
 
 
@@ -65,8 +70,8 @@ export default function Review({product}) {
 
             
             <ScrollView showsVerticalScrollIndicator={false}>
-            { feedbacks.map((feedback, index) => (
-              <Box p={4} bg={Colors.gray} mt={5} rounded={5} key={index}>
+            { feedbacks.map((feedback) => (
+              <Box p={4} bg={Colors.gray} mt={5} rounded={5} key={feedback._id}>
                 <Box >
                   <Flex direction="row">
                   <Image source={{uri: `${baseURL}images/users/` + feedback.user.avatar}} 

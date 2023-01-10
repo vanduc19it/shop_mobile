@@ -3,28 +3,42 @@ import { Box, Button, Center, FormControl, HStack, Input, ScrollView, Text, VSta
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../Colors'
+import { useSelector } from 'react-redux';
 
-const ShippingInputs = [
-  {
-    label: "Tên người nhận", 
-    type: "text",
-  },
-  {
-    label: "Số điện thoại", 
-    type: "text",
-  },
-  {
-    label: "Địa chỉ nhận hàng", 
-    type: "text",
-  },
-  {
-    label: "Tỉnh/ Thành phố", 
-    type: "text",
-  }
-]
+
+
+
+
+
+
+
 
 function ShippingScreen() {
   const navigation = useNavigation()
+
+  const ShippingInputs = [
+    {
+      label: "Tên người nhận", 
+      type: "text",
+      value: "Văn Đức"
+    },
+    {
+      label: "Số điện thoại", 
+      type: "text",
+      value: "0354941620"
+    },
+    {
+      label: "Địa chỉ nhận hàng", 
+      type: "text",
+      value: "Trường ĐH CNTT & TT Việt Hàn, 470 Trần Đại Nghĩa, Đà Nẵng, Việt Nam"
+    },
+    {
+      label: "Tỉnh/ Thành phố", 
+      type: "text",
+      value: "Đà Nẵng"
+    }
+  ]
+
   return (
     <Box flex={1} safeAreaTop bg="#66aff6" py={5}> 
       <HStack>
@@ -61,6 +75,7 @@ function ShippingScreen() {
                 fontSize={14}
                 type={i.type}
                 color="#fff"
+                value={i.value}
                 _focus={{
                   bg:Colors.lightblue,
                   borderWidth: 0.2,

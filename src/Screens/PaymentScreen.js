@@ -1,23 +1,23 @@
-import { Box, Center, FormControl, HStack, Image, Input, ScrollView, Spacer, Text, VStack} from 'native-base'
+import { Box, Center, Checkbox, HStack, Image, ScrollView, Text, VStack} from 'native-base'
 import React from 'react'
 import Buttone from '../Components/Buttone'
-import {Ionicons,FontAwesome} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../Colors';
 const paymentMethods = [
   {
-    image: require("../../assets/shop.png"), 
+    image: require("../../assets/shipcod.jpg"), 
     alt: "shipcod",
-    icon: "Ionicons",
+    name: "Thanh toán khi nhận hàng"
   },
   {
-    image: require("../../assets/shop.png"), 
+    image: require("../../assets/MoMo.jpg"), 
     alt: "momo",
-    icon: "fontAwesome",
+    name: "Thanh toán qua ví Momo"
   },
   {
-    image: require("../../assets/shop.png"), 
+    image: require("../../assets/banking.jpg"), 
     alt: "shoppepay",
-    icon: "Ionicons",
+    name: "Tài khoản ngân hàng"
   },
  
 ]
@@ -40,7 +40,7 @@ function PaymentScreen() {
             alignItems="center"
             bg="#66aff6"
             px={3}
-            py={1}
+            py={2}
             justifyContent="space-between"
             rounded={10}
             
@@ -51,19 +51,14 @@ function PaymentScreen() {
               w={60} h={50}
               />
             </Box>
-            {i.icon === "Ionicons" ? (
-                <Ionicons name="checkmark-circle" size={30} color="#000"/>
-            )
-              : 
-              (
-                <FontAwesome name="circle-thin" size={30} color="#000"/>
-              )
-            }
+            <Text bold color={Colors.white}>{i.name}</Text>
+            <Checkbox value="test"colorScheme="green" rounded="full"  accessibilityLabel="This is checkbox" defaultIsChecked />
+                          
             
             </HStack>
           ))}
         
-          <Buttone bg="#66aff6" color="#fff" onPress={()=> navigation.navigate("Order")}>CONTINUE</Buttone>
+          <Buttone bg="#66aff6" color="#fff" onPress={()=> navigation.navigate("Order")}>Xác nhận</Buttone>
           <Text italic textAlign="center">Payment method is <Text italic bold>Shipcod</Text>
           </Text>
         </VStack>

@@ -1,10 +1,8 @@
-import { Box, Button, Heading, Image, Input, Pressable, Text, View, VStack, FormControl,Center, Icon } from 'native-base'
+import { Box, Button, Heading, Image, Input, Pressable, Text, VStack, FormControl,Center, Icon,  useToast} from 'native-base'
 import React, {useState} from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { MaterialIcons } from '@expo/vector-icons';
+import { useDispatch} from "react-redux";
 import { Ionicons } from '@expo/vector-icons';
 import { register } from '../Redux/Actions/userActions';
-import Buttone from '../Components/Buttone'
 import Colors from '../Colors'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -38,21 +36,25 @@ function RegisterScreen({navigation}) {
     if(confirmPassword === "") {
       setValidateConfirmPassword(false)
     }
-    if (password === confirmPassword) {
-      // dispatch(register(name, email, password))
-      // navigation.navigate("Bottom")
+    if (password === confirmPassword && name !== "" && email !== "" && password !== "") {
+      dispatch(register(name, email, password))
+      navigation.navigate("Login")
+      toast.show({
+        render: () => {
+          return <Box bg="emerald.500" px="2" py="2" rounded="sm" mb={5}>
+                  Đăng ký thành công!
+                </Box>;
+        },
+        duration: 2000,
+      })
     }
     
   }
-  const [show, setShow] = React.useState(false);
-
-
-
-
+  const [show, setShow] = useState(false);
+  const toast = useToast()
 
   return (
     <Box flex={1} bg={Colors.white}>
-  
      <Box 
        w="full"
        h="95%"
@@ -63,7 +65,7 @@ function RegisterScreen({navigation}) {
        mt={4}
        >
         <Center>
-        <Heading mb={2}>SIGN UP</Heading>
+            <Heading mb={2}>SIGN UP</Heading>
         </Center>
 
         
@@ -79,13 +81,13 @@ function RegisterScreen({navigation}) {
        <FormControl isRequired>
        <VStack space={2} pt="6">
          <Input
-           InputLeftElement={
-            <Icon as={
-            <AntDesign name="user" size={24} color="black" />}
-            color={Colors.black}
-            ml="4" 
-            size={5}
-            />
+            InputLeftElement={
+                <Icon as={
+                <AntDesign name="user" size={24} color="black" />}
+                color={Colors.black}
+                ml="4" 
+                size={5}
+                />
            }
            variant="underlined" 
            placeholder='Nhập tên người dùng' 
@@ -105,7 +107,6 @@ function RegisterScreen({navigation}) {
            Nhập tên của bạn
            </FormControl.HelperText> : ''
          }
-        
            
           <Input
            InputLeftElement={

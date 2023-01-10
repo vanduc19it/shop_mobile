@@ -14,6 +14,8 @@ import ResetPasswordScreen from '../Screens/ResetPasswordScreen'
 import LoginScreen from '../Screens/LoginScreen'
 import SearchScreen from '../Screens/SearchScreen'
 import ShopScreen from '../Screens/ShopScreen'
+import CategoryScreen from '../Screens/CategoryScreen'
+import Review from '../Components/Review'
 const Stack = createNativeStackNavigator()
 export default function StackNav() {
   return (
@@ -37,6 +39,8 @@ export default function StackNav() {
          <Stack.Screen name="Login" component={LoginScreen} />
          <Stack.Screen name="Search" component={SearchScreen} />
          <Stack.Screen name="Shop" component={ShopScreen} />
+         <Stack.Screen name="Category" component={CategoryScreen} />
+         <Stack.Screen name="Review" component={Review} />
     </Stack.Navigator>
   )
 }
