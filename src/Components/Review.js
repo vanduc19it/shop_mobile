@@ -1,6 +1,6 @@
-import { Text } from 'react-native'
+
 import React, { useState, useEffect } from 'react'
-import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, useToast, Image, Flex } from 'native-base'
+import { Box, CheckIcon, FormControl, Heading, Select, TextArea, VStack, ScrollView, useToast, Image, Flex ,Text} from 'native-base'
 import Ratingg from './Rating'
 import Message from './Notifications/Message'
 import Buttone from '../Components/Buttone'
@@ -53,7 +53,7 @@ export default function Review({product}) {
 
   return (
     <Box my={9}>
-        <Heading bold fontSize={15} mb={2}> REVIEW</Heading>
+        <Heading bold fontSize={15} mb={2}> REVIEW </Heading>
         {/* ko co comment */}
         {
           !userInfo ?
@@ -66,26 +66,28 @@ export default function Review({product}) {
             
             <ScrollView showsVerticalScrollIndicator={false}>
             { feedbacks.map((feedback, index) => (
-              <Box p={3} bg={Colors.gray} mt={5} rounded={5} key={index}>
+              <Box p={4} bg={Colors.gray} mt={5} rounded={5} key={index}>
                 <Box >
-                  <Flex direction="row"  >
+                  <Flex direction="row">
                   <Image source={{uri: `${baseURL}images/users/` + feedback.user.avatar}} 
                   w={10}
                   h={30}
                     resizeMode="contain"
                   alt={feedback.user.username}
-                 
+                  ml={-1}
                   />
                   <Heading fontSize={15} mt={1} color="#000">{feedback.user.username}</Heading>
 
                 </Flex>
               
                 </Box>
+                <Box mt={1}>
+                <Ratingg value={feedback.rate} />
+                </Box>
                 
-                <Ratingg value={feedback.rate}/>
  
               
-              <Text my={2} fontSize={11}>{moment(Number(feedback.createAt)).locale("vi").startOf("second").fromNow() }</Text>
+              <Text mb={2} fontSize={11}>{moment(Number(feedback.createAt)).locale("vi").startOf("second").fromNow() }</Text>
               <Message children={feedback.comment}/>
             
             </Box>
@@ -151,23 +153,24 @@ export default function Review({product}) {
                 _text={{
                   fontSize: "12px",
                   fontWeight: "bold",
+                  color:Colors.black
                 }}
               >
-                Comment
+                Để lại bình luận
               </FormControl.Label>
-              <TextArea h={24} w="full" placeholder="san pham nhu db..." borderWidth={0}
-                
-                bg="#66aff6"
+              <TextArea h={24} w="full" placeholder="Viết đánh giá của bạn về sản phẩm này..." borderWidth={0}
+                color={Colors.black}
+                bg={Colors.blue2}
                 py={4} 
                 _focus={{
-                  bg: "#66aff6",
+                  bg: Colors.blue2,
                 }}
                 value={comment}
                 onChangeText={(e) => setComment(e)}
               />
             </FormControl>
-            <Buttone bg="#66aff6" color="#fff" mt={5} onPress={handleReview}>
-              BINH LUAN
+            <Buttone bg={Colors.orange} color="#fff" mt={5} onPress={handleReview}>
+              ĐÁNH GIÁ
             </Buttone>
             </>
             

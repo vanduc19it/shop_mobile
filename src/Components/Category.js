@@ -1,6 +1,5 @@
-import { View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Box, Center, Flex, HStack, Image, Pressable, ScrollView } from 'native-base'
+import { Box, Center, Flex, HStack, Image, Pressable, ScrollView, Text } from 'native-base'
 import axios from "axios"
 import {baseURL} from '../Url'
 import Colors from '../Colors'
@@ -23,7 +22,7 @@ export default function Category() {
             flexWrap="wrap" 
             direction="column" 
             justifyContent="space-evenly"
-            px={6}>
+            px={4}>
                 {
                     category.map((item)=> (
                         <Pressable w="20" h="20" bg={Colors.white} mr={6} rounded={20} key={item._id} borderColor={Colors.gray} borderWidth="1" >
@@ -36,7 +35,7 @@ export default function Category() {
                                 rounded="20"
                             />
                             <Center mt={1}>
-                                <Text fontSize={3} >{item.nameCategory}</Text>
+                                <Text fontSize={12}  >{item.nameCategory}</Text>
                             </Center>  
                         </Pressable>
                     ))

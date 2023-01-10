@@ -29,7 +29,7 @@ export default function HomeSearch() {
             bg={Colors.white}
             type="search"
             variant="filled"
-            h={12}
+            h={10}
             fontSize={14}
             borderWidth={0}
             _focus={{

@@ -28,7 +28,7 @@ function SearchScreen() {
     <Box flex={1}>
         {/* search product */}
          <HStack 
-        space={3} 
+        space={2} 
         w="full" 
         px={4} 
         bg={Colors.bar} 
@@ -39,9 +39,9 @@ function SearchScreen() {
         <Center>
         <AntDesign name="leftcircleo" size={24} color={Colors.white} onPress={() => navigation.navigate("Home")} />
         </Center>
-        <Input placeholder="Bạn tìm gì hôm nay?"
+        <Input placeholder="Bạn tìm gì hôm nay ?"
             rounded={50}
-            w="60%"
+            w="64%"
             bg={Colors.white}
             type="search"
             variant="filled"
@@ -55,7 +55,7 @@ function SearchScreen() {
             onChangeText={(e)=> setSearchText(e)}
            
         />
-        <Button rounded={50} bg={Colors.red} bold onPress={handleSearch}> Tìm kiếm </Button>
+        <Button rounded={40} bg={Colors.red} bold onPress={handleSearch}>Tìm kiếm</Button>
         </HStack>
         {/* show product search */}
          <ScrollView flex={1} showsVerticalScrollIndicator={false}>

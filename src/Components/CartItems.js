@@ -1,5 +1,5 @@
 import {  Dimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, Box, Center, HStack, Image, Pressable, VStack,ScrollView, Flex, Checkbox, Divider } from 'native-base'
 import {baseURL} from '../Url'
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 import NumericInput from "react-native-numeric-input"
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, getCart } from '../Redux/Actions/CartActions';
+import { getShopDetail } from '../Redux/Actions/shopActions';
 
 
 
@@ -30,9 +31,20 @@ const CartItems = () => {
     
   }
 
+  useEffect(()=> {
+    dispatch(getShopDetail(userInfo.idUser))
+},[dispatch, userInfo.idUser])
+
+
+const shopDetail = useSelector((state)=> state.shopDetail)
+const {shopInfo} = shopDetail;
+console.log(shopInfo)
+
+
   const cart = useSelector((state)=> state.cart)
   const {cartItems} = cart;
- 
+
+ console.log(cartItems)
 
   
   return (
@@ -54,20 +66,18 @@ const CartItems = () => {
                   <Box bg={Colors.white} w="88%" mb={3}>
 
                     <VStack>
-                        <HStack space={2} mb={3} mt={3}>
+                        <HStack space={2} mb={3} mt={3} >
                             <Image 
-                                source={{uri: "https://cdn.pixabay.com/photo/2020/11/06/05/33/woman-5716875__340.png"}} 
+                                source={{uri: shopInfo.imgShop ? `${baseURL}images/shops/`+ shopInfo.imgShop : "https://tse3.mm.bing.net/th?id=OIP.-iHHGNEt70z4UO6e_TdcfQHaIs&pid=Api" }} 
                                 alt="abc" 
                                 h={30}  w={30}
                                 resizeMode="stretch"
                                 rounded="full"
                             />
                             <Center>
-                                <Text>HelloYou</Text>
+                                <Text>{shopInfo.nameShop}</Text>
                             </Center>
-                            <Center>
-                                <AntDesign name="right" size={14} color="#ccc" />
-                            </Center>
+                           
                         </HStack>
                         <HStack space={5}>
                             
@@ -79,7 +89,7 @@ const CartItems = () => {
                                 onPress={() => navigation.navigate("SingleProductScreen", item.product)}
                             />
                             <VStack space={2}> 
-                              <Text w="80%" bold>{item.product.nameProduct}</Text>
+                              <Text w="95%" bold>{item.product.nameProduct}</Text>
 
                               <NumericInput
                                   value={item.product.quantity}
@@ -97,7 +107,7 @@ const CartItems = () => {
                                   leftButtonBackgroundColor={Colors.white} 
                                   onChange={(e) => console.log(e)}
                               />
-                              <Text bold>Giá: {item.product.unit_price} đ</Text>
+                              <Text bold fontSize={13}>Giá: <Text color={Colors.red}>{item.product.unit_price} đ</Text></Text>
                             </VStack>
                            
                         </HStack>

@@ -3,6 +3,8 @@ import {Center, HStack, Image, Pressable, ScrollView, Text, Flex, Box} from 'nat
 import axios from 'axios';
 import { baseURL } from '../Url';
 import Colors from '../Colors';
+import HomeSearch from '../Components/HomeSearch';
+
 export default function CategoryScreen() {
   const [category, setCategory] = useState([]);
   const [itemCategory, setItemCategory] = useState([]);
@@ -29,7 +31,10 @@ export default function CategoryScreen() {
       }
   }
   return (
+    <Box>
+      <HomeSearch/>
     <HStack space={1}>
+      
       <ScrollView w="30%" bg="#ccc">
       {
         category.map((item) => (
@@ -99,5 +104,6 @@ export default function CategoryScreen() {
       </ScrollView>
       
     </HStack>
+    </Box>
   )
 }

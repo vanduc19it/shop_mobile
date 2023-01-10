@@ -8,6 +8,7 @@ import Buttone from '../Components/Buttone'
 import Colors from '../Colors'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 function RegisterScreen({navigation}) {
 
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function RegisterScreen({navigation}) {
     
   }
   const [show, setShow] = React.useState(false);
+
+
+
+
 
   return (
     <Box flex={1} bg={Colors.white}>
@@ -83,7 +88,7 @@ function RegisterScreen({navigation}) {
             />
            }
            variant="underlined" 
-           placeholder='Van duc shopiiii' 
+           placeholder='Nhập tên người dùng' 
            w="100%" 
            p={3}
            color={Colors.black}
@@ -113,7 +118,7 @@ function RegisterScreen({navigation}) {
             />
            }
            variant="underlined" 
-           placeholder='user@gmail.com' 
+           placeholder='Nhập email của bạn' 
            w="100%" 
            p={3}
            rounded={50}

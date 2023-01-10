@@ -71,7 +71,7 @@ const [show, setShow] = React.useState(false);
             pl={2} 
             value={email}
             onChangeText={(e) => setEmail(e)}
-            bg={Colors.lightblue}
+            bg={Colors.blue2}
             borderBottomColor={Colors.white}
           />
           {/* input password */}
@@ -105,13 +105,13 @@ const [show, setShow] = React.useState(false);
             rounded={50}
             pl={2} 
             borderBottomColor={Colors.white}
-            bg={Colors.lightblue}
+            bg={Colors.blue2}
             value={password}
             onChangeText={(e) => setPassword(e)}
             
           />
           <Flex alignItems="flex-end" mr="1">
-             <Text italic color="#ccc">Forgot Password</Text>
+             <Text italic color={Colors.orange}>Forgot Password</Text>
           </Flex>
          
         </VStack> 
@@ -127,12 +127,12 @@ const [show, setShow] = React.useState(false);
           rounded={50} 
           bg={Colors.main}
           onPress={handleLogin}
-          color={Colors.black}
+          color={Colors.white}
         >
           LOGIN
         </Buttone>
         <Center >
-          <Text color="#ccc" italic mt={2}>__________ OR ___________</Text>
+          <Text color={Colors.lightblue} italic mt={2}>__________ OR ___________</Text>
         </Center>
         {/* fb and gg */}
         <Center mt={5} mb={0}>
