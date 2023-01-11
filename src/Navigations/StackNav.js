@@ -16,6 +16,7 @@ import SearchScreen from '../Screens/SearchScreen'
 import ShopScreen from '../Screens/ShopScreen'
 import CategoryScreen from '../Screens/CategoryScreen'
 import Review from '../Components/Review'
+import ManageOrderScreen from '../Screens/ManageOrderScreen'
 const Stack = createNativeStackNavigator()
 export default function StackNav() {
   return (
@@ -41,6 +42,7 @@ export default function StackNav() {
          <Stack.Screen name="Shop" component={ShopScreen} />
          <Stack.Screen name="Category" component={CategoryScreen} />
          <Stack.Screen name="Review" component={Review} />
+         <Stack.Screen name="ManageOrder" component={ManageOrderScreen} />
     </Stack.Navigator>
   )
 }

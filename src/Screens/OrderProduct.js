@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { Box, Button, Center, Checkbox, Divider, Flex, FormControl, HStack, Image, Input, ScrollView, Text, VStack,useToast, AlertDialog} from 'native-base'
+import { Box, Button, Center, Checkbox, Divider, Flex, HStack, Image, Input, ScrollView, Text, VStack,useToast, AlertDialog} from 'native-base'
 import React, { useEffect, useRef, useState } from 'react'
 import Colors from '../Colors'
 import { EvilIcons } from '@expo/vector-icons';
@@ -37,6 +37,7 @@ function OrderProduct() {
     
   }
 
+  console.log(cartItems)
   const handleOrderProduct = () => {
     dispatch( 
       createOrder({

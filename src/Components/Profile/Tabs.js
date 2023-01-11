@@ -1,14 +1,18 @@
-import { View, Text,  } from "native-base";
+import { View, Text, Box,  } from "native-base";
 import React, {useState} from 'react'
 import { SceneMap, TabView  } from "react-native-tab-view";
 import { useWindowDimensions, StyleSheet } from 'react-native';
-import Profile from './Profile';
-import Orders from './Orders';
+import Waiting from "../StatusOrder/Waiting";
+import Approved from "../StatusOrder/Approved";
+import Delivered from "../StatusOrder/Delivered";
+import Delivering from "../StatusOrder/Delivering";
 
 
 const renderScene = SceneMap({
-    first: Profile,
-    second: Orders,
+    first: Waiting,
+    second: Approved,
+    third: Delivering,
+    four: Delivered,
 
 })
 export default function Tabs() {
@@ -16,10 +20,16 @@ export default function Tabs() {
     const [index, setIndex] = useState(0);
     const [routes] = useState([
         {
-            key: "first", title:"PROFILE"
+            key: "first", title:"Chờ xác nhận"
         },
         {
-            key: "second", title:"ORDERs"
+            key: "second", title:"Đã xác nhận"
+        },
+        {
+            key: "third", title:"Đang giao"
+        },
+        {
+            key: "four", title:"Đã giao"
         },
     ]);
 
