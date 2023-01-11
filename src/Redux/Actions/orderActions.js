@@ -20,7 +20,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         }
       
         let dataa = {
-            cartItems: [ ], 
+            cartItems: [], 
             shippintInfor:
                 {
                 idUser: userInfo.idUser,
@@ -36,11 +36,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
         order.orderItems.map((item) => {
               dataa.cartItems.push(
                 {
-                    idProduct: item.idProduct, 
-                    nameProduct: item.nameProduct,
-                    imgProduct: item.imgProduct,
-                    quantity: item.quantity,
-                    unit_price: item.unit_price,
+                    idProduct: item.product.idProduct, 
+                    nameProduct: item.product.nameProduct,
+                    imgProduct: item.product.imgProduct,
+                    quantity: item.product.quantity,
+                    unit_price: item.product.unit_price,
                   }
               )        
         })
