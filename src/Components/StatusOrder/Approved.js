@@ -31,6 +31,7 @@ const Approved = () => {
   const shopDetail = useSelector((state)=> state.shopDetail)
   const {shopInfo} = shopDetail;
 
+  console.log(order)
     //tong price cho  tung item 
     var a = 0;
     const [b, setB] = useState(0)
@@ -122,10 +123,10 @@ const Approved = () => {
                 ))
             }
            
-             
+            
               
                   <Flex alignItems="flex-end" pt={2} pb={2}>
-                      <Text >{item.productItems.length} mặt hàng, tổng cộng: <Text bold color= {Colors.red}>{b} đ</Text> </Text>
+                      <Text >{item.productItems.length} mặt hàng, tổng cộng: <Text bold color= {Colors.red}>{item.totalPrice} đ</Text> </Text>
                   </Flex>
           </Box>
             ))

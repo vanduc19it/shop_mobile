@@ -112,8 +112,6 @@ const Waiting = () => {
                         a += product.unit_price * product.quantity
                         setB(a)
                       },[product])
-
-
                        
                     }
                 </VStack>
@@ -121,14 +119,17 @@ const Waiting = () => {
                    
                 ))
             }
-           
+          
              
               
                   <Flex alignItems="flex-end" pt={2} pb={2}>
-                      <Text >{item.productItems.length} mặt hàng, tổng cộng: <Text bold color= {Colors.red}>{b} đ</Text> </Text>
+                      <Text >{item.productItems.length} mặt hàng, tổng cộng: <Text bold color= {Colors.red}>{item.totalPrice} đ</Text> </Text>
                   </Flex>
           </Box>
+         
+       
             ))
+            
           }
 
 
