@@ -24,6 +24,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
             shippintInfor:
                 {
                 idUser: userInfo.idUser,
+                idShop: order.idShop,
                 namedReceiver: userInfo.username,  
                 addressReceiver: order.shippingInfo, 
                 phoneReceiver: "0354941620",  
