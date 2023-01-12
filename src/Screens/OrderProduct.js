@@ -42,6 +42,7 @@ function OrderProduct() {
     dispatch( 
       createOrder({
         orderItems: cartItems,
+        idShop: shopInfo._id,
         shippingInfo: "Trường ĐH CNTT & TT Việt Hàn, 470 Trần Đại Nghĩa, Đà Nẵng, Việt Nam",
         paymentMethod: "shipcod",
         itemsPrice: itemsPrice,
