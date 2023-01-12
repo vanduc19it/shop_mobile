@@ -21,7 +21,6 @@ function SingleProductScreen({route}) {
   
   const [quantity, setQuantity] = useState(0)
 
-
   const cart = useSelector((state)=> state.cart)
   const {cartItems} = cart;
 
@@ -31,7 +30,7 @@ function SingleProductScreen({route}) {
       dispatch(getCart(userInfo.idUser))
       navigation.navigate("Cart", 1 )
   }
- 
+
 
 
   return (
@@ -61,7 +60,7 @@ function SingleProductScreen({route}) {
               rounded textColor={Colors.black} iconStyle={{color: Colors.white}}
               rightButtonBackgroundColor={Colors.red}
               leftButtonBackgroundColor={Colors.blue}
-              onChange={(e) => console.log(e)}
+              onChange={(e) => setQuantity(e)}
           />
           <Spacer/>
           <Heading bold color="#000" fontSize={15}>Giá: <Text color={Colors.red}>{product.price} đ</Text> </Heading>
